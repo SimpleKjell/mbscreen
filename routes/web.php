@@ -133,4 +133,15 @@ Route::get('/admin/facebook/callback', function(SammyK\LaravelFacebookSdk\Larave
     // var_dump('sweot');
     return redirect()->action('SocialController@create');
     // return redirect()->action('KampagnenController@index');
+
+
+
 });
+
+
+
+
+// Route::get('/userTimeline', function()
+// {
+// 	return Twitter::getUserTimeline(['screen_name' => 'thujohn', 'count' => 20, 'format' => 'json']);
+// });

@@ -7,10 +7,10 @@
   <!--  Facebook Accs Token -->
   @if($access_token)
 
-  {!! Form::open(['action' => 'SocialController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data'] ) !!}
+  {!! Form::open(['action' => 'SocialController@store', 'method' => 'POST'] ) !!}
       <div class="form-group">
         {{Form::label('social', 'Title')}}
-        {{Form::text('social', 'Facebook', ['class' => 'form-control', 'placeholder' => 'Title der Kampagne'])}}
+        {{Form::hidden('social', 'Facebook', ['class' => 'form-control', 'placeholder' => 'Title der Kampagne'])}}
       </div>
 
       {{Form::hidden('key', $access_token)}}
@@ -27,8 +27,26 @@
       <a href="{{$facebook_l}}" class="btn btn-outline-info btn-lg btn-block">Facebook</a>
     @endif
 
-    <a href="" class="btn btn-outline-warning btn-lg btn-block">Twitter</a>
-    <a href="" class="btn btn-outline-secondary btn-lg btn-block">Instagram</a>
+    @if(!$twitter)
+      {!! Form::open(['action' => 'SocialController@store', 'method' => 'POST'] ) !!}
+
+
+          {{Form::hidden('social', 'Twitter')}}
+
+          {{Form::submit('Twitter', ['class' => 'btn btn-outline-warning btn-lg btn-block'])}}
+      {!! Form::close() !!}
+    @endif
+
+    @if(!$instagram)
+      {!! Form::open(['action' => 'SocialController@store', 'method' => 'POST'] ) !!}
+
+
+          {{Form::hidden('social', 'Instagram')}}
+
+          {{Form::submit('Instagram', ['class' => 'btn btn-outline-secondary btn-lg btn-block'])}}
+      {!! Form::close() !!}
+    @endif
+        
   </div>
 
   @endif

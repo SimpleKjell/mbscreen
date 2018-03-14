@@ -42,10 +42,14 @@ class SocialController extends Controller
         }
       }
 
+      $twitter = Social::whereSocial('Twitter')->first();
+      $instagram = Social::whereSocial('Instagram')->first();
 
       $data = [
         'facebook_l' => $facebookL,
-        'access_token' => $accesToken
+        'access_token' => $accesToken,
+        'twitter' => $twitter,
+        'instagram' => $instagram,
       ];
 
       return view('socials.create')->with($data);
@@ -61,22 +65,44 @@ class SocialController extends Controller
     {
 
       $this->validate($request, [
-        'key' => 'required',
-        'social' => 'required',
-        'auth' => 'nullable',
-        'key' => 'nullable',
-        'pub' => 'nullable'
+        'social' => 'required'
       ]);
+
+
+      if($request->input('social') == 'Facebook') {
+
+        $this->validate($request, [
+          'key' => 'required',
+          'social' => 'required',
+          'auth' => 'nullable',
+          'key' => 'nullable',
+          'pub' => 'nullable'
+        ]);
+
+      } else {
+
+        $this->validate($request, [
+          'key' => 'nullable',
+          'social' => 'required',
+          'auth' => 'nullable',
+          'key' => 'nullable',
+          'pub' => 'nullable'
+        ]);
+
+      }
 
       // Create Social
       $social = new Social;
       $social->social = $request->input('social');
-      $social->key = $request->input('key');
-      $social->save();
+
+
 
       if($social->social == 'Facebook') {
         $request->session()->forget('fb_user_access_token');
+        $social->key = $request->input('key');
       }
+
+      $social->save();
 
       return redirect('/admin/socials')->with('success', 'Socialeintrag erstellt.');
 
@@ -90,8 +116,8 @@ class SocialController extends Controller
      */
     public function show($id)
     {
-        //
-        // echo ' heh';
+      $social = Social::find($id);
+      return view('socials.show')->with('social', $social);
     }
 
     /**

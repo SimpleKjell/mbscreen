@@ -12,10 +12,8 @@
 
         <div class="col">
           <div class="card">
-            <img class="card-img-top" src="/storage/cover_images/bilsd" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title"><a href="/admin/kampagnen/test">Titel</a></h5>
-              <p class="card-text">Beschreibung</p>
+              <h5 class="card-title"><a href="/admin/socials/{{$social->id}}">{{$social->social}}</a></h5>
             </div>
           </div>
         </div>

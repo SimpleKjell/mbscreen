@@ -13,5 +13,13 @@ class Social extends Model
   //timestamps
   public $timestamps = true;
   // Fillable
-  protected $fillable = ['id', 'social', 'auth', 'key', 'pub'];  
+  protected $fillable = ['id', 'social', 'auth', 'key', 'pub'];
+
+  /**
+     * Get the comments for the blog post.
+     */
+    public function socialInstances()
+    {
+        return $this->hasMany('App\SocialInstance');
+    }
 }

@@ -1,0 +1,103 @@
+ul.row.carousel-indicators {
+  list-style: none;
+  padding: 0;
+  margin-left: -15px;
+  margin-right: -15px;
+  position: relative;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  justify-content: inherit;
+}
+.carousel-indicators li {
+  flex: inherit;
+  width: 100%;
+  height: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-indent: initial;
+  background-color: initial;
+}
+.carousel-indicators .active {
+  background-color: initial;
+}
+.mbStepContentBase {
+  position: absolute;
+  left: 0;
+  padding: 20px;
+  background-color: rgba(255,255,255, 0.9);
+  z-index: 1;
+  border-bottom-right-radius: 20px;
+  max-width: 300px;
+  text-align: left;
+}
+
+@mixin circle($size: 100px) {
+ width: $size;
+ height: $size;
+ position: relative;
+
+ -webkit-border-radius: $size / 2 + 0px;
+ -moz-border-radius: $size / 2 + 0px;
+ border-radius: $size / 2 + 0px;
+
+}
+
+.mbStepContentContainer {
+  height: 70vh;
+  background-color: #E2FAF6;
+}
+.mbSteps .mbStepSingle .text-circle {
+  @include circle(30px);
+  background: #abc;
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+.mbSteps .mbStepSingle:before, .mbSteps .mbStepSingle:after {
+  position: absolute;
+  content: '';
+  height: 8px;
+  background: #edeff0;
+  margin: 0;
+  background: #abc;
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  top: 15px;
+  transform: translate(0%, -50%);
+}
+.mbSteps .mbStepSingle:before {
+  transform: translate(-100%, -50%);
+}
+.mbSteps .mbStepSingle.active .text-circle,
+.mbSteps .mbStepSingle.active:before,
+.mbSteps .mbStepSingle.activeBetween .text-circle,
+.mbSteps .mbStepSingle.activeBetween:before,
+.mbSteps .mbStepSingle.activeBetween:after,
+.mbSteps .mbStepSingle.progress-active .text-circle,
+.mbSteps .mbStepSingle.progress-active:before,
+.mbSteps .mbStepSingle.progress-active:after {
+  background-color: #E2FAF6;
+}
+
+
+.mbSteps .mbStepSingle a {
+  padding: 5px 10px;
+  text-align: center;
+  background-color: #BFDDC4;
+  display: inline-block;
+  min-width: 100px;
+}
+.bg-mb-occ {
+  background-color: #DDDAC0;
+}
+.bg-mb-hb {
+  background: #CAE2F4
+}

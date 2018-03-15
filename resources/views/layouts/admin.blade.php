@@ -17,7 +17,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/admin') }}">
                     <img src="http://www.mediabrothers.at/wp-content/themes/mediabrothers/assets/images/logo.png" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,9 @@
                       </li>
                       <li>
                         <a class="nav-link" href="/admin/socials">Socials</a>
+                      </li>
+                      <li>
+                        <a class="nav-link" href="/admin/feeds">Feeds</a>
                       </li>
                     </ul>
 
@@ -66,7 +69,7 @@
         </nav>
 
         <main class="py-4">
-          <div class="container">            
+          <div class="container">
             @include('inc.messages')
             @yield('content')
           </div>

@@ -16,6 +16,10 @@
       <div class="form-group">
         {{Form::file('cover_image')}}
       </div>
+      <div class="form-group">
+        {{Form::label('video_url', 'Video URL (Youtube,Vimeo)')}}
+        {{Form::text('video_url', '', ['class' => 'form-control', 'placeholder' => 'Beschreibungstext'])}}
+      </div>
       <a href="/admin/kampagnen" class="btn btn-secondary">Zurück zu allen Kampagnen</a>
       {{Form::submit('Absenden', ['class' => 'btn btn-primary'])}}
   {!! Form::close() !!}

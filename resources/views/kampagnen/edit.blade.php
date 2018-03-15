@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <h1 class="mb-md-3">Erstelle Kampagne</h1>
+  <h1 class="mb-md-3">{{$kampagne->title}}</h1>
 
   {!! Form::open(['action' => ['KampagnenController@update', $kampagne->id], 'method' => 'POST', 'enctype' => 'multipart/form-data'] ) !!}
       <div class="form-group">
@@ -15,6 +15,10 @@
       </div>
       <div class="form-group">
         {{Form::file('cover_image')}}
+      </div>
+      <div class="form-group">
+        {{Form::label('video_url', 'Video URL (Youtube,Vimeo)')}}
+        {{Form::text('video_url', '', ['class' => 'form-control', 'placeholder' => 'https://www.youtube.com/watch?v=ZHyopzbBuFk'])}}
       </div>
       <a href="/admin/kampagnen/{{$kampagne->id}}" class="btn btn-secondary">Zurück</a>
       {{Form::hidden('_method', 'PUT')}}

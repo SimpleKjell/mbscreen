@@ -183,7 +183,6 @@ class SocialInstancesController extends Controller
      */
     public function update(Request $request, $sId, $id)
     {
-
       $socialInstance = SocialInstance::find($id);
       $socialInstance->anz_posts = $request->input('anz_posts');
       $socialInstance->save();
@@ -200,8 +199,6 @@ class SocialInstancesController extends Controller
      */
     public function destroy($sID, $id)
     {
-
-
       $instance = SocialInstance::find($id);
       $instance->delete();
 

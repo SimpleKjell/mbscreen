@@ -12,19 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('kampagnen');
+    return view('frontend.kampagnen');
 });
 Route::get('/kampagnen', function () {
-    return view('kampagnen');
+    return view('frontend.kampagnen');
 });
 Route::get('/mediabrothers', function () {
-    return view('mediabrothers');
+    return view('frontend.mediabrothers');
 });
 Route::get('/aktuell', function () {
-    return view('aktuell');
+    return view('frontend.aktuell');
 });
 Route::get('/welcome', function () {
-    return view('welcome');
+    return view('frontend.welcome');
 });
 
 Auth::routes();
@@ -40,6 +40,8 @@ Route::resource('admin/kampagnen', 'KampagnenController', [
 Route::resource('admin/socials', 'SocialController')->middleware('auth');
 
 Route::resource('admin/socials.i', 'SocialInstancesController')->middleware('auth');
+
+Route::resource('admin/feeds', 'FeedsController')->middleware('auth');
 
 
 /*

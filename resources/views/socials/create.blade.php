@@ -9,8 +9,8 @@
 
   {!! Form::open(['action' => 'SocialController@store', 'method' => 'POST'] ) !!}
       <div class="form-group">
-        {{Form::label('social', 'Title')}}
-        {{Form::hidden('social', 'Facebook', ['class' => 'form-control', 'placeholder' => 'Title der Kampagne'])}}
+        <h3>Erstelle Facebook Verbindung</h3>
+        {{Form::hidden('social', 'Facebook')}}
       </div>
 
       {{Form::hidden('key', $access_token)}}
@@ -46,7 +46,7 @@
           {{Form::submit('Instagram', ['class' => 'btn btn-outline-secondary btn-lg btn-block'])}}
       {!! Form::close() !!}
     @endif
-        
+
   </div>
 
   @endif

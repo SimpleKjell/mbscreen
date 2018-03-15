@@ -32,9 +32,14 @@ Auth::routes();
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
 
 
-Route::resource('admin/kampagnen', 'KampagnenController')->middleware('auth');
+Route::resource('admin/kampagnen', 'KampagnenController', [
+  'names' => [
+      'index' => 'kampagnen'
+  ]])->middleware('auth');
 
 Route::resource('admin/socials', 'SocialController')->middleware('auth');
+
+Route::resource('admin/socials.i', 'SocialInstancesController')->middleware('auth');
 
 
 /*
@@ -141,7 +146,7 @@ Route::get('/admin/facebook/callback', function(SammyK\LaravelFacebookSdk\Larave
 
 
 
-// Route::get('/userTimeline', function()
-// {
-// 	return Twitter::getUserTimeline(['screen_name' => 'thujohn', 'count' => 20, 'format' => 'json']);
-// });
+Route::get('/userTimeline', function()
+{
+	return Twitter::getUserTimeline(['screen_name' => 'MediaBrothers', 'count' => 10, 'format' => 'json']);
+});

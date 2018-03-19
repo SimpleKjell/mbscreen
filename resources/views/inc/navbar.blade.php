@@ -7,7 +7,7 @@
       <a href="/mediabrothers" class="navbar-brand d-flex align-items-center">
         <strong>Mediaborthers</strong>
       </a>
-      <a href="/social" class="navbar-brand d-flex align-items-center">
+      <a href="/social-news" class="navbar-brand d-flex align-items-center">
         <strong>Socialmedia News</strong>
       </a>
       <a href="/aktuell" class="navbar-brand d-flex align-items-center">

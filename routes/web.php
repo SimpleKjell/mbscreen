@@ -17,9 +17,14 @@ Route::get('/', function () {
 Route::get('/kampagnen', function () {
     return view('frontend.kampagnen');
 });
-Route::get('/mediabrothers', function () {
-    return view('frontend.mediabrothers');
-});
+
+
+
+Route::get('/mediabrothers', 'FrontendController@showSocialStream');
+Route::get('/social-news', 'FrontendController@showSocialNews');
+
+
+
 Route::get('/aktuell', function () {
     return view('frontend.aktuell');
 });
@@ -150,5 +155,5 @@ Route::get('/admin/facebook/callback', function(SammyK\LaravelFacebookSdk\Larave
 
 Route::get('/userTimeline', function()
 {
-	return Twitter::getUserTimeline(['screen_name' => 'MediaBrothers', 'count' => 10, 'format' => 'json']);
+	return Twitter::getUserTimeline(['screen_name' => 'MediaBrothers', 'count' => 10, 'format' => 'array']);
 });

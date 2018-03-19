@@ -9994,6 +9994,16 @@ a.text-dark:focus {
   }
 }
 
+header {
+  height: 10vh;
+  background-color: #83C5B9;
+  min-height: 90px;
+}
+
+html .bg-dark {
+  background-color: #83C5B9 !important;
+}
+
 ul.row.carousel-indicators {
   list-style: none;
   padding: 0;
@@ -10103,5 +10113,60 @@ ul.row.carousel-indicators {
 
 .bg-mb-hb {
   background: #CAE2F4;
+}
+
+.social-container {
+  background-color: #304B61;
+}
+
+.social-container .card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 0px;
+  max-width: 255px;
+}
+
+.social-container .card .card-img-top {
+  background-color: #fff;
+}
+
+.social-container .card div.card-img-top {
+  background-position: center;
+  background-size: cover;
+}
+
+.social-container .card .card-img-top img {
+  visibility: hidden;
+}
+
+.social-container .twitter {
+  background-color: #48AAE6;
+  color: #fff;
+}
+
+.social-container .facebook {
+  background-color: #4267b2;
+  color: #fff;
+}
+
+.social-container .instagram {
+  background-color: #003569;
+  color: #fff;
+}
+
+.social-container .card .social-icon {
+  text-align: right;
+  padding: 5px 10px;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  margin-top: -33px;
+  color: #333;
+}
+
+.social-container .card .social-icon img {
+  max-width: 20px;
+}
+
+.social-container .card-deck {
+  margin-left: 0;
 }
 

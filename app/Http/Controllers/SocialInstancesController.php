@@ -91,6 +91,7 @@ class SocialInstancesController extends Controller
       // Social der Instance
       $social = Social::find($id);
 
+      $pageId = 0;
       // Facebook API Call
       if($social->social == 'Facebook') {
 
@@ -135,6 +136,7 @@ class SocialInstancesController extends Controller
 
       $socialInstance->social_id = $id;
       $socialInstance->anz_posts = $request->input('anz_posts');
+      $socialInstance->page_id = $pageId;
 
 
       $socialInstance->save();

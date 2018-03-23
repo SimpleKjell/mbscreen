@@ -33,9 +33,9 @@
                       <li>
                         <a class="nav-link" href="/admin/socials">Socials</a>
                       </li>
-                      <li>
+                      <!-- <li>
                         <a class="nav-link" href="/admin/feeds">Feeds</a>
-                      </li>
+                      </li> -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->

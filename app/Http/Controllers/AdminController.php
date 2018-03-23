@@ -26,3 +26,4 @@ class AdminController extends Controller
         return view('admin');
     }
 }
+// gBWeKUMkkPWn7FBP

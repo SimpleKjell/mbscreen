@@ -8,10 +8,17 @@
 
     <title></title>
     <link rel="stylesheet" href="/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
   </head>
-  <body>
+  <body class="home">
     @include('inc.navbar')
-    @yield('content')
+
+    <!-- <div data-next="mediabrothers" class="transition-layer"></div> -->
+    <div id="main" class="main">
+      @yield('content')
+    </div>
   </body>
   <script src="/js/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.1/masonry.pkgd.min.js"></script>
+
 </html>

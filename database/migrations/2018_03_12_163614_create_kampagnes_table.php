@@ -16,7 +16,10 @@ class CreateKampagnesTable extends Migration
         Schema::create('kampagnes', function (Blueprint $table) {
           $table->increments('id');
           $table->string('title');
-          $table->mediumText('desc');
+          $table->mediumText('text_1')->nullable();
+          $table->mediumText('text_2')->nullable();
+          $table->mediumText('text_3')->nullable();
+          $table->mediumText('text_4')->nullable();
           $table->timestamps();
         });
     }

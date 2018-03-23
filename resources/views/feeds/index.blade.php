@@ -12,7 +12,7 @@
       <th scope="col">ID</th>
       <th scope="col">Name der Page</th>
       <th scope="col">Anzahl anzuzeigender Posts</th>
-      <th scope="col">Edit</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +24,7 @@
           <th scope="row">{{$feed->id}}</th>
           <td>{{$feed->feed_url}}</td>
           <td>{{$feed->anz_posts}}</td>
-          <td>
+          <td class="float-right">
             <a href="/admin/feeds/{{$feed->id}}/edit" class="btn btn-info">Bearbeiten</a>
 
             {!! Form::open(['action' => ['FeedsController@destroy', $feed->id], 'method' => 'POST', 'class'=> "d-inline-block"]) !!}

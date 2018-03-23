@@ -6,6 +6,7 @@ use App;
 use App\Social;
 use Illuminate\Http\Request;
 use App\SocialInstance;
+use Vinkla\Instagram\Instagram;
 
 class SocialInstancesController extends Controller
 {
@@ -45,7 +46,7 @@ class SocialInstancesController extends Controller
           }
 
           $pageIds = $response->getDecodedBody();
-
+          // var_dump($social->key);
 
           foreach ($pageIds['data'] as $key => $pageId) {
             $pageId = $pageId['id'];

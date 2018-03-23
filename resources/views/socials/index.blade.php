@@ -4,28 +4,42 @@
 
   <h1 class="mb-md-3">Socials</h1>
 
-  @if(count($socials) > 0)
 
-    <div class="row">
+  <table class="table table-hover marginTopMedium">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
 
-      @foreach($socials as $social)
+      @if(count($socials) > 0)
 
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><a href="/admin/socials/{{$social->id}}">{{$social->social}}</a></h5>
+        @foreach($socials as $social)
+
+        <tr>
+          <th scope="row">{{$social->id}}</th>
+          <td>{{$social->social}}</td>
+          <td>
+            <div class="float-right">
+              <a href="/admin/socials/{{$social->id}}" class="btn btn-info">Bearbeiten</a>
+
+              {!! Form::open(['action' => ['SocialController@destroy', $social->id], 'method' => 'POST', 'class'=> "d-inline-block"]) !!}
+
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Löschen', ['class' => 'btn btn-danger'])}}
+
+              {!! Form::close() !!}
             </div>
-          </div>
-        </div>
+          </td>
+        </tr>
+        @endforeach
 
-      @endforeach
-
-    </div>
-  @else
-    <p>
-      Keine Social Media Verbindungen vorhanden.
-    </p>
-  @endif
+      @endif
+    </tbody>
+  </table>
 
   <a href="/admin/socials/create" class="mt-md-3 btn btn-block btn-info" >Weitere Verbindung hinzufügen</a>
 

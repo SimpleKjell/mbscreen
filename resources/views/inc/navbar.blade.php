@@ -1,20 +1,17 @@
 <header>
-  <div class="navbar navbar-dark bg-dark box-shadow">
+  <div class="navbar h-100">
     <div class="container d-flex justify-content-between">
-      <a href="/kampagnen" class="navbar-brand d-flex align-items-center">
+      <a href="/" class="nav-link d-flex align-items-center {{ Request::is('/') ? 'active' : '' }}">
         <strong>Kampagnen</strong>
       </a>
-      <a href="/mediabrothers" class="navbar-brand d-flex align-items-center">
-        <strong>Mediaborthers</strong>
+      <a href="/mediabrothers" class="nav-link d-flex align-items-center {{ Request::path() == 'mediabrothers' ? 'active' : '' }}">
+        <strong>Mediaborthers Feed</strong>
       </a>
-      <a href="/social-news" class="navbar-brand d-flex align-items-center">
+      <a href="/social-news" class="nav-link d-flex align-items-center {{ Request::path() == 'social-news' ? 'active' : '' }}">
         <strong>Socialmedia News</strong>
       </a>
-      <a href="/aktuell" class="navbar-brand d-flex align-items-center">
-        <strong>Aktuell</strong>
-      </a>
-      <a class="navbar-brand pull-right" href="#">
-        <img src="http://www.mediabrothers.at/wp-content/themes/mediabrothers/assets/images/logo.png" alt="">
+      <a href="/aktuell" class="nav-link d-flex align-items-center {{ Request::path() == 'aktuell' ? 'active' : '' }}">
+        <strong>Live</strong>
       </a>
     </div>
   </div>

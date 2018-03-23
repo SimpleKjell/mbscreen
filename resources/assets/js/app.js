@@ -23,7 +23,7 @@ require('./bootstrap');
 
 jQuery(document).ready(function($) {
 
-  $('#carouselExampleIndicators').on('slid.bs.carousel', function () {
+  $('#kampagnenSlider').on('slid.bs.carousel', function () {
 
     var activ = parseInt($('.mbStepSingle.active').attr('data-slide-to'));
 
@@ -39,7 +39,70 @@ jQuery(document).ready(function($) {
     $('.mbStepSingle.activeBetween').removeClass('activeBetween');
   });
 
-  $('#carouselExampleIndicators').on('slide.bs.carousel', function () {
+  $('#kampagnenSlider').on('slide.bs.carousel', function () {
     $('.mbStepSingle.active').addClass('activeBetween');
   })
+
+
+
+  /*
+  * Erster Versuch, zwischen den Slides zu wechseln.
+  */
+  $('.transition-layer').click(function () {
+
+
+
+    $('.transition-layer').addClass('active');
+
+    setTimeout(function () {
+
+      var url = '/' + $('.transition-layer').attr('data-next');
+
+      $.ajax({
+      url: url,
+      beforeSend: function( xhr ) {
+
+      }}).done(function( data ) {
+        $('#main').html(data);
+
+        /*
+        * Setze neue Navlinks
+        */
+        $('.nav-link').removeClass('active');
+        $nav = $('[href="/'+$('.transition-layer').attr('data-next')+'"]').addClass('active');
+
+        /*
+        * Und den nächsten
+        */
+        $next = $nav.next();
+        if($next.length > 0) {
+          $('.transition-layer').attr('data-next', $next.attr('href').replace('/', ''));
+        } else {
+          $('.transition-layer').attr('data-next', '');
+        }
+
+
+        setTimeout(function () {
+          $('.transition-layer').removeClass('active');
+        }, 1000);
+
+
+      });
+
+    }, 2500);
+
+
+
+  })
+
+
+  $('.grid').masonry({
+    // options...
+    itemSelector: '.grid-item',
+    // columnWidth: 200,
+    // gutter: 25,
+    columnWidth: '.grid-sizer',
+    gutter: '.gutter-sizer',
+  });
+
 })

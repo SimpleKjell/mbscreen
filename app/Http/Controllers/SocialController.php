@@ -6,6 +6,7 @@ use App\Social;
 use Illuminate\Http\Request;
 use App;
 use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
+use App\SocialInstance;
 
 class SocialController extends Controller
 {
@@ -151,6 +152,15 @@ class SocialController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $social = Social::find($id);
+
+      $instances = SocialInstance::whereSocialId($social->id)->get();
+
+      foreach ($instances as $instance) {
+        $instance->delete();
+      }
+      $social->delete();
+
+      return redirect('/admin/socials/')->with('success', 'Erfolgreich gelöscht.');
     }
 }

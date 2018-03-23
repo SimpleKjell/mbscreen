@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://mbscreen-localhost.de'),
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +150,7 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
+        Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -216,7 +217,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
-
+        'Trello' => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
     ],
 
 ];

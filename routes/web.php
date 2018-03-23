@@ -11,17 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.kampagnen');
-});
-Route::get('/kampagnen', function () {
-    return view('frontend.kampagnen');
-});
+// Route::get('/', function () {
+//     return view('frontend.kampagnen');
+// });
+// Route::get('/kampagnen', function () {
+//     return view('frontend.kampagnen');
+// });
 
 
 
 Route::get('/mediabrothers', 'FrontendController@showSocialStream');
 Route::get('/social-news', 'FrontendController@showSocialNews');
+Route::get('/', 'FrontendController@showKampagnen');
 
 
 
@@ -151,9 +152,66 @@ Route::get('/admin/facebook/callback', function(SammyK\LaravelFacebookSdk\Larave
 });
 
 
-
+use Trello\Client;
 
 Route::get('/userTimeline', function()
 {
-	return Twitter::getUserTimeline(['screen_name' => 'MediaBrothers', 'count' => 10, 'format' => 'array']);
+  // $test = Twitter::getUserTimeline(['screen_name' => 'MediaBrothers', 'count' => 10, 'format' => 'array']);
+
+  // var_dump($test->entities);
+  // 976074723531673600
+  // return Twitter::getUserTimeline(['screen_name' => 'MiauuMiauu', 'count' => 2, 'format' => 'array','tweet_mode' => 'extended', 'exclude_replies' => true]);
+  // return Twitter::getTweet('976071831890399232', ['format' => 'array', 'tweet_mode' => 'extended']);
+
+
+	// return;
+
+  // $instagram = new Instagram('6950340697.1677ed0.15b25467b93641b69fb7a93d6212cb9e');
+  // $test = $instagram->get();
+  // var_dump($test);
+
+  // $card = Trello::getDefaultBoardId();
+  // var_dump($card);
+
+  $client = new Client();
+  $client->authenticate('d5a25eb37b0ad428c54b117283a319c6', '7e746bb766b845769015a7d7a45513bec3656e19692958168dfe182cbcf8792a', Client::AUTH_URL_CLIENT_ID);
+
+  $board = Trello::manager()->getBoard('58aed927e680a8be5093f3b3');
+  $boardName = $board->getName();
+
+  $data = [
+    'boardName' => $boardName,
+  ];
+
+  $lists = $board->getLists();
+  foreach ($lists as $list) {
+    $listName = $list->getName();
+    $listArray = ['name' => $listName, 'cards' => []];
+
+    $cards = $list->getCards();
+    foreach ($cards as $card) {
+
+      $pic = '';
+      if($card->getAttachmentCoverId()) {
+        try {
+          $pic = $client->api('card')->attachments()->show($card->getId(), $card->getAttachmentCoverId());
+          $pic = $pic['url'];
+        } catch (\Exception $e) {
+
+        }
+
+      }
+      $cardName = $card->getName();
+      $listArray['cards'][] = [
+        'name' => $cardName,
+        'picture' => $pic
+      ];
+    }
+    $data['lists'][] = $listArray;
+  }
+
+
+
+
+
 });

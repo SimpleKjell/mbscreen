@@ -40,33 +40,48 @@ class KampagnenController extends Controller
     {
         $this->validate($request, [
           'title' => 'required',
-          'desc' => 'required',
-          'cover_image' => 'image|nullable|max:1999'
+          // 'desc' => 'required',
+          // 'cover_image' => 'image|nullable|max:1999'
         ]);
 
-        // Handle File Upload
-        if($request->hasFile('cover_image')) {
 
-          // Get filename with the extension
-          $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-          // Get just filename
-          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-          // Get just ext
-          $extension = $request->file('cover_image')->getClientOriginalExtension();
-          // Filename to store
-          $fileNameToStore = $filename . '_'. time() . '.' . $extension;
-          // Upload Image
-          $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
 
-        } else {
-          $fileNameToStore = 'noimage.jpg';
-        }
 
         // Create Kamapgne
         $kampagne = new Kampagne;
+
         $kampagne->title = $request->input('title');
-        $kampagne->desc = $request->input('desc');
-        $kampagne->cover_image = $fileNameToStore;
+
+        // Media
+        if(!is_null($request['image_main'])) {
+
+          $kampagne
+            ->addMediaFromRequest('image_main')
+            ->toMediaCollection('main');
+
+            // var_dump('ja');
+            // exit();
+        }
+        if(!is_null($request['image_side'])) {
+          $kampagne
+            ->addMediaFromRequest('image_side')
+            ->toMediaCollection('side');
+        }
+        if(!is_null($request['image_side_2'])) {
+          $kampagne
+            ->addMediaFromRequest('image_side_2')
+            ->toMediaCollection('side_2');
+        }
+        if(!is_null($request['image_square'])) {
+          $kampagne
+            ->addMediaFromRequest('image_square')
+            ->toMediaCollection('square');
+        }
+
+        $kampagne->text_1 = $request->input('text_1');
+        $kampagne->text_2 = $request->input('text_2');
+        $kampagne->text_3 = $request->input('text_3');
+
         $kampagne->save();
 
         return redirect('/admin/kampagnen')->with('success', 'Kampagne erstellt.');
@@ -109,33 +124,64 @@ class KampagnenController extends Controller
     {
       $this->validate($request, [
         'title' => 'required',
-        'desc' => 'required',
       ]);
-
-      // Handle File Upload
-      if($request->hasFile('cover_image')) {
-
-        // Get filename with the extension
-        $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-        // Get just filename
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        // Get just ext
-        $extension = $request->file('cover_image')->getClientOriginalExtension();
-        // Filename to store
-        $fileNameToStore = $filename . '_'. time() . '.' . $extension;
-        // Upload Image
-        $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-
-      }
 
       // Update Kamapgne
       $kampagne = Kampagne::find($id);
       $kampagne->title = $request->input('title');
-      $kampagne->desc = $request->input('desc');
-      if($request->hasFile('cover_image')) {
-          $kampagne->cover_image = $fileNameToStore;
+
+
+      // Media
+      if(!is_null($request['image_main'])) {
+
+        // Lösche Media
+        $mainMedia = $kampagne->getFirstMedia('main');
+        if(!is_null($mainMedia)) {
+          $mainMedia->delete();
+        }
+
+        $kampagne
+          ->addMediaFromRequest('image_main')
+          ->toMediaCollection('main');
+      }
+      if(!is_null($request['image_side'])) {
+
+        // Lösche Media
+        $media = $kampagne->getFirstMedia('side');
+        if(!is_null($media)) {
+          $media->delete();
+        }
+
+        $kampagne
+          ->addMediaFromRequest('image_side')
+          ->toMediaCollection('side');
+      }
+      if(!is_null($request['image_side_2'])) {
+
+        // Lösche Media
+        $media = $kampagne->getFirstMedia('side_2');
+        if(!is_null($media)) {
+          $media->delete();
+        }
+        $kampagne
+          ->addMediaFromRequest('image_side_2')
+          ->toMediaCollection('side_2');
+      }
+      if(!is_null($request['image_square'])) {
+
+        // Lösche Media
+        $media = $kampagne->getFirstMedia('square');
+        if(!is_null($media)) {
+          $media->delete();
+        }
+        $kampagne
+          ->addMediaFromRequest('image_square')
+          ->toMediaCollection('square');
       }
 
+      $kampagne->text_1 = $request->input('text_1');
+      $kampagne->text_2 = $request->input('text_2');
+      $kampagne->text_3 = $request->input('text_3');
       $kampagne->save();
 
       return redirect('/admin/kampagnen')->with('success', 'Kampagne bearbeitet.');
@@ -150,11 +196,6 @@ class KampagnenController extends Controller
     public function destroy($id)
     {
         $kampagne = Kampagne::find($id);
-
-        if($kampagne->cover_image != 'noimage.jpg') {
-          // Delete Image
-          Storage::delete('public/cover_images/' . $kampagne->cover_image);
-        }
         $kampagne->delete();
 
         return redirect('/admin/kampagnen')->with('success', 'Kampagne gelöscht.');

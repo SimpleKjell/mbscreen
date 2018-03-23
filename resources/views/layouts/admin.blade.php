@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="admin">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -83,7 +83,25 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'article-ckeditor' );
+        // CKEDITOR.replace( 'article-ckeditor' );
+        CKEDITOR.replace('article-ckeditor', {
+        	height: 200,
+        	maxLength: 0,
+        	toolbar: 'TinyBare',
+        	toolbar_TinyBare: [['Bold','Italic','Underline'],[],[],['NumberedList','BulletedList']]
+      	});
+        CKEDITOR.replace('article-ckeditor-2', {
+        	height: 200,
+        	maxLength: 0,
+        	toolbar: 'TinyBare',
+        	toolbar_TinyBare: [['Bold','Italic','Underline'],[],[],['NumberedList','BulletedList']]
+      	});
+        CKEDITOR.replace('article-ckeditor-3', {
+        	height: 200,
+        	maxLength: 0,
+        	toolbar: 'TinyBare',
+        	toolbar_TinyBare: [['Bold','Italic','Underline'],[],[],['NumberedList','BulletedList']]
+      	});
     </script>
 </body>
 </html>

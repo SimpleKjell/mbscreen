@@ -22,7 +22,7 @@
       {{Form::hidden('anz_posts', '10')}}
 
 
-      {{Form::submit('Hinzufügen', ['class' => 'btn btn-primary'])}}
+      {{Form::submit('Hinzufügen', ['class' => 'btn btn-info btn-block'])}}
 
     {!! Form::close() !!}
 
@@ -43,9 +43,13 @@
     {{Form::hidden('anz_posts', '10')}}
 
 
-    {{Form::submit('Hinzufügen', ['class' => 'btn btn-primary'])}}
+    {{Form::submit('Hinzufügen', ['class' => 'btn btn-info btn-block'])}}
 
   {!! Form::close() !!}
+
+  @elseif($social->social == 'Instagram')
+
+  Derzeit wird automatisiert https://www.instagram.com/mediabrothers/ ausgelesen.
 
   @endif
 

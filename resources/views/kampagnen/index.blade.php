@@ -4,25 +4,47 @@
 
   <h1 class="mb-md-3">Kampagnen</h1>
 
+
+
+
   @if(count($kampagnes) > 0)
 
-    <div class="row">
+  <table class="table table-hover">
+    <caption>Übersicht der Feeds</caption>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
 
-      @foreach($kampagnes as $kampagne)
+      @if($kampagnes)
+        @foreach($kampagnes as $kampagne)
 
-        <div class="col">
-          <div class="card">
-            <img class="card-img-top" src="/storage/cover_images/{{$kampagne->cover_image}}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title"><a href="/admin/kampagnen/{{$kampagne->id}}">{{ $kampagne->title }}</a></h5>
-              <p class="card-text">{!! $kampagne->desc !!}</p>
-            </div>
-          </div>
-        </div>
+          <tr>
+            <th scope="row">{{$kampagne->id}}</th>
+            <td>{{$kampagne->title}}</td>
+            <td>
+              <div class="float-right">
+                <a href="/admin/kampagnen/{{$kampagne->id}}/edit" class="btn btn-info">Bearbeiten</a>
 
-      @endforeach
+                {!! Form::open(['action' => ['KampagnenController@destroy', $kampagne->id], 'method' => 'POST', 'class'=> "d-inline-block"]) !!}
 
-    </div>
+                  {{Form::hidden('_method', 'DELETE')}}
+                  {{Form::submit('Löschen', ['class' => 'btn btn-danger'])}}
+
+                {!! Form::close() !!}
+              </div>
+            </td>
+          </tr>
+
+        @endforeach
+      @endif
+    </tbody>
+  </table>
+
   @else
     <p>
       Keine Kampagnen vorhanden.

@@ -1,14 +1,72 @@
 <div class="container-fluid">
-  <div class="row text-center">
-    <div class="mbStepContentBase">
-      <h3>Name XY</h3>
+  <!-- <div class="mbStepContentBase">
+    <h3>Name XY</h3>
+    <p>
+      <b>Unterüberschrift</b>
+    </p>
+    <p>
+      Lorem Ipusm delor Ipsum delorem Ispum delorem Ipsum delor delor ipsium
+    </p>
+  </div> -->
+
+  <?php
+
+
+  ?>
+
+  <div class="row first-row">
+    <div class="col m-auto">
+      <div class="text-container p-md-3">
+        <?php echo $kampagne->text_1; ?>
+      </div>
+    </div>
+    <div class="col p-md-3 m-auto h-100">
+      <?php $url = '';
+        $media = $kampagne->getFirstMedia('side');
+        if(!is_null($media)) {
+          $url = $media->getUrl('side');
+        } ?>
+      <img src="<?php echo $url; ?>" alt="">
+    </div>
+    <div class="col p-md-3 m-auto h-100">
+      <?php $url = '';
+        $media = $kampagne->getFirstMedia('side_2');
+        if(!is_null($media)) {
+          $url = $media->getUrl('side');
+        } ?>
+      <img src="<?php echo $url;?>" alt="">
+    </div>
+  </div>
+
+  <div class="row second-row">
+    <div class="col-md-6">
+      <?php $url = '';
+        $media = $kampagne->getFirstMedia('main');
+        if(!is_null($media)) {
+          $url = $media->getUrl('main');
+        } ?>
+      <img src="<?php echo $url;?>" alt="">
+    </div>
+    <div class="col-md-2">
       <p>
-        <b>Unterüberschrift</b>
+        <?php echo $kampagne->text_2; ?>
       </p>
       <p>
-        Lorem Ipusm delor Ipsum delorem Ispum delorem Ipsum delor delor ipsium
+        <?php echo $kampagne->text_3; ?>
       </p>
     </div>
+    <div class="col-md-4">
+      <?php $url = '';
+        $media = $kampagne->getFirstMedia('square');
+        if(!is_null($media)) {
+          $url = $media->getUrl('square');
+        } ?>
+      <img src="<?php echo $url;?>" alt="">
+    </div>
+  </div>
+
+  <div class="row text-center">
+
     <!--  Hauptcol -->
     <div class="col">
       <div class="my-3 py-3 bg-dark">

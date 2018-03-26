@@ -10,6 +10,9 @@ input[type="file"] {
 .hidden {
   display: none;
 }
+.hide-overflow {
+  overflow: hidden;
+}
 img {
   max-width: 100%;
 }
@@ -259,12 +262,12 @@ ul.row.carousel-indicators {
   height: 30vh;
 }
 .kampagnen-container .second-row {
-  height: 50vh;
+  height: 46vh;
 }
 .kampagnen-container img {
   height: 100%;
   width: 100%;
 }
 .mb-step-content-container {
-  height: 78vh;
+  // height: 78vh;
 }

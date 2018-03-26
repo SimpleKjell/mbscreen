@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="row second-row">
+  <div class="row second-row pb-md-3">
     <div class="col-md-6">
       <?php $url = 'http://via.placeholder.com/1200x720';
         $media = $kampagne->getFirstMedia('main');
@@ -47,7 +47,7 @@
         } ?>
       <img src="<?php echo $url;?>" alt="">
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 hide-overflow">
       <p>
         <?php echo $kampagne->text_2; ?>
       </p>
@@ -62,50 +62,6 @@
           $url = $media->getUrl('square');
         } ?>
       <img src="<?php echo $url;?>" alt="">
-    </div>
-  </div>
-
-  <div class="row text-center">
-
-    <!--  Hauptcol -->
-    <div class="col">
-      <div class="my-3 py-3 bg-dark">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-    </div>
-    <!--  Hauptcol -->
-    <div class="col">
-      <div class="py-3 bg-mb-occ">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="my-3 py-3 bg-light">
-        <h1>Kommentare</h1>
-      </div>
-    </div>
-    <!--  Hauptcol -->
-    <div class="col">
-      <div class="py-3 bg-mb-hb">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
-      <div class="my-3 py-3">
-        <h2 class="display-5">Another headline</h2>
-        <p class="lead">And an even wittier subheading.</p>
-      </div>
     </div>
   </div>
 

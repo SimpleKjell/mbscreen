@@ -13,11 +13,11 @@
   <body class="home">
     @include('inc.navbar')
 
-    <div data-next="mediabrothers" class="transition-layer">
+    <!-- <div data-next="mediabrothers" class="transition-layer">
       <div class="logo">
         <img src="http://www.mediabrothers.at/wp-content/themes/mediabrothers/assets/images/logo.png" alt="">
       </div>
-    </div>
+    </div> -->
     <div class="scroll"></div>
     <div class="masonry"></div>
 

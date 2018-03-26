@@ -186,9 +186,9 @@ class FrontendController extends Controller
       * Trello Board
       */
       $client = new Client();
-      $client->authenticate('d5a25eb37b0ad428c54b117283a319c6', '7e746bb766b845769015a7d7a45513bec3656e19692958168dfe182cbcf8792a', Client::AUTH_URL_CLIENT_ID);
+      $client->authenticate('827f16eedf45fe96e0a50fd465f6709a', 'ad5232815c9def3347199597dbb7915091dafcbe41367c3890609f543de61e7e', Client::AUTH_URL_CLIENT_ID);
 
-      $board = Trello::manager()->getBoard('58aed927e680a8be5093f3b3');
+      $board = Trello::manager()->getBoard('mDYLXl9E');
       $boardName = $board->getName();
 
       $data = [

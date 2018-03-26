@@ -22,13 +22,13 @@ header {
   min-height: 90px;
 }
 .transition-layer {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 999;
-  transition: all 2.5s ease;
+  transition: all .5s ease;
 
   background: #326273;
   background: -webkit-gradient(linear, left top, left bottom, from(#326273), to(#193a55));
@@ -36,6 +36,21 @@ header {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#326273', endColorstr='#193a55',GradientType=0 );
   opacity: 0;
 }
+.transition-layer .logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+}
+
+
 .transition-layer.active {
   opacity: 1;
 }
@@ -62,6 +77,11 @@ body.home {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   line-height: 1.8em;
+  -ms-overflow-style: none;  // IE 10+
+  overflow: -moz-scrollbars-none;  // Firefox
+}
+body::-webkit-scrollbar {
+  display: none;  // Safari and Chrome
 }
 
 ul.row.carousel-indicators {

@@ -1,7 +1,3 @@
-@extends('layouts.front')
-
-@section('content')
-
 <div class="social-container paddingTopMedium">
   <div class="container ">
     <div class="grid">
@@ -94,4 +90,3 @@
 
   </div>
 </div>
-@endsection

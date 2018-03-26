@@ -48,22 +48,21 @@ jQuery(document).ready(function($) {
   /*
   * Erster Versuch, zwischen den Slides zu wechseln.
   */
-  $('.transition-layer').click(function () {
-
-
-
+  $('.transition-layer').unbind().click(function () {
+    console.log('wie oft');
     $('.transition-layer').addClass('active');
 
     setTimeout(function () {
 
-      var url = '/' + $('.transition-layer').attr('data-next');
+      var curr = $('.transition-layer').attr('data-next');
+      var url = '/' + curr;
 
       $.ajax({
       url: url,
       beforeSend: function( xhr ) {
 
       }}).done(function( data ) {
-        $('#main').html(data);
+        $('#main').html(data).attr('data-curr', next);
 
         /*
         * Setze neue Navlinks
@@ -76,33 +75,126 @@ jQuery(document).ready(function($) {
         */
         $next = $nav.next();
         if($next.length > 0) {
-          $('.transition-layer').attr('data-next', $next.attr('href').replace('/', ''));
+          var next = $next.attr('href').replace('/', '');
+          $('.transition-layer').attr('data-next', next);
         } else {
+          var next = '';
           $('.transition-layer').attr('data-next', '');
         }
 
 
+        window.scrollTo(0, 0);
+
         setTimeout(function () {
           $('.transition-layer').removeClass('active');
+
+          /*
+          * Überprüfe, um welchen Screen es sich handelt, und führe eventuell weitere Aktionen aus.
+          */
+          switch (curr) {
+            case 'mediabrothers':
+
+              $('.scroll').click();
+              $('.masonry').click();
+
+              break;
+            case 'social-news':
+
+              $('.scroll').click();
+
+              break;
+            case 'aktuell':
+
+              setTimeout(function() {
+                $('.transition-layer').click();
+              }, 10000)
+
+              break;
+            case '':
+              location.reload();
+              break;
+          }
+
+
         }, 1000);
 
 
       });
 
-    }, 2500);
+    }, 500);
 
 
 
   })
 
 
-  $('.grid').masonry({
-    // options...
-    itemSelector: '.grid-item',
-    // columnWidth: 200,
-    // gutter: 25,
-    columnWidth: '.grid-sizer',
-    gutter: '.gutter-sizer',
-  });
+  $(document).on('click', '.masonry', function() {
+    $('.grid').masonry({
+      // options...
+      itemSelector: '.grid-item',
+      // columnWidth: 200,
+      // gutter: 25,
+      columnWidth: '.grid-sizer',
+      gutter: '.gutter-sizer',
+    });
+  })
+
+  $('.scroll').unbind().bind('click', function() {
+    console.log('yeop');
+    var stop = false;
+    var ani = setInterval(function () {
+      if(stop) {
+        stop = false;
+        $("html, body").finish()
+      } else {
+        aniAn(ani);
+        stop = true;
+      }
+    }, 8000);
+
+
+
+  })
+
+  function aniAn(ani) {
+    console.log('hoer?');
+
+    var scrollHeight = $(document).height();
+    var scrollPosition = $(window).height() + $(window).scrollTop();
+    if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+        console.log('schon hier');
+        $('.transition-layer').click();
+        clearInterval(ani);
+    }
+
+    $("html, body").animate({ scrollTop: $(document).scrollTop() + 400 }, {duration: 4000, easing: 'linear'});
+  }
+
+
+  /*
+  * Carousel
+  */
+  $('#kampagnenSlider').carousel({
+    interval: 8000
+  })
+
+  $('#kampagnenSlider').on('slide.bs.carousel', function () {
+    /*
+    * Überprüfe, ob es der letzte ist
+    */
+    var anzItems = parseInt($('.mb-step-content-container').attr('data-items')) - 1;
+    var currItem = parseInt($('.mbStepSingle.active').attr('data-slide-to')) + 1;
+
+    if(anzItems === currItem) {
+      $('#kampagnenSlider').carousel('pause')
+
+      setTimeout(function() {
+        $('.transition-layer').click();
+      }, 8000)
+    }
+
+
+
+  })
 
 })

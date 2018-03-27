@@ -128,6 +128,21 @@ jQuery(document).ready(function($) {
   })
 
 
+  /*
+  * Zum Testen hier - muss wieder gelöscht werden
+  */
+  $('.grid').masonry({
+    // options...
+    itemSelector: '.grid-item',
+    // columnWidth: 200,
+    // gutter: 25,
+    columnWidth: '.grid-sizer',
+    gutter: '.gutter-sizer',
+  });
+  /*
+  * Zum Testen hier - muss wieder gelöscht werden
+  */
+
   $(document).on('click', '.masonry', function() {
     $('.grid').masonry({
       // options...
@@ -157,12 +172,12 @@ jQuery(document).ready(function($) {
   })
 
   function aniAn(ani) {
-    console.log('hoer?');
+
 
     var scrollHeight = $(document).height();
     var scrollPosition = $(window).height() + $(window).scrollTop();
     if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-        console.log('schon hier');
+
         $('.transition-layer').click();
         clearInterval(ani);
     }

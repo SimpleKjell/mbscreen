@@ -10024,6 +10024,10 @@ header {
   min-height: 90px;
 }
 
+.mb-tv-logo img {
+  width: 70px;
+}
+
 .transition-layer {
   position: fixed;
   top: 0;

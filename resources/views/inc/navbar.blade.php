@@ -13,6 +13,10 @@
       <a href="/aktuell" class="nav-link d-flex align-items-center {{ Request::path() == 'aktuell' ? 'active' : '' }}">
         <strong>Live</strong>
       </a>
+      <a href="/" class="nav-link d-flex align-items-center mb-tv-logo">
+        <img src="/storage/images/mbtv_logo.png" alt="">
+      </a>
+
     </div>
   </div>
 </header>

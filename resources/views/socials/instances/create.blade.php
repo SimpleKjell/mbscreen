@@ -54,7 +54,26 @@
 
   @elseif($social->social == 'Instagram')
 
-  Derzeit wird automatisiert https://www.instagram.com/mediabrothers/ ausgelesen.
+    {!! Form::open(['action' => ['SocialInstancesController@store', $social->id], 'method' => 'POST'] ) !!}
+
+
+      <div class="form-group">
+        {{Form::label('title', 'Accountname')}}
+        {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Name des Accounts, z.B. mediabrothers'])}}
+      </div>
+      <div class="form-group">
+        {{Form::label('page_id', 'Page ID')}}
+        {{Form::text('page_id', '', ['class' => 'form-control', 'placeholder' => 'Name des Accounts, z.B. 1771883507 (mb)'])}}
+      </div>
+
+
+      {{Form::hidden('social_id', $social->id)}}
+      {{Form::hidden('anz_posts', '10')}}
+
+
+      {{Form::submit('Hinzufügen', ['class' => 'btn btn-info btn-block'])}}
+
+    {!! Form::close() !!}
 
   @endif
 

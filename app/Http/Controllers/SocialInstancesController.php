@@ -68,6 +68,10 @@ class SocialInstancesController extends Controller
 
 
 
+        } else {
+
+
+
         }
       }
 
@@ -142,6 +146,10 @@ class SocialInstancesController extends Controller
         ]);
 
         // Name der Instance
+        $name = $request->input('title');
+
+      } else {
+        $pageId = $request->input('page_id');
         $name = $request->input('title');
 
       }
@@ -219,7 +227,7 @@ class SocialInstancesController extends Controller
       } else {
         $socialInstance->use_wall = '';
       }
-      
+      $socialInstance->title = $request->input('title');
       $socialInstance->kunden_id = $request->input('kunden_id');
       $socialInstance->save();
 

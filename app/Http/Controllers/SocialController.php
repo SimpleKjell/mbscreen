@@ -17,7 +17,6 @@ class SocialController extends Controller
      */
     public function index()
     {
-
       // $kampagnes = Kampagne::all();
       $socials = Social::orderBy('id', 'desc')->get();
       return view('socials.index')->with('socials', $socials);

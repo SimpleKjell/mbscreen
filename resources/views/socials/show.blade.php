@@ -25,8 +25,9 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
+        <th scope="col">Page ID</th>
         <th scope="col">Name der Page</th>
-        <th scope="col">Anzahl anzuzeigender Posts</th>
+        <th scope="col">Anzahl der Posts</th>
         <th scope="col">Kunde</th>
         <th scope="col">Intern</th>
         <th scope="col"></th>
@@ -37,6 +38,7 @@
         <?php $kunde = $instance->kunde()->first(); ?>
         <tr>
           <th scope="row">{{$instance->id}}</th>
+          <th scope="row">{{$instance->page_id}}</th>
           <td>{{$instance->title}}</td>
           <td>{{$instance->anz_posts}}</td>
           <td>{{($kunde) ? $kunde->title : ''}}</td>

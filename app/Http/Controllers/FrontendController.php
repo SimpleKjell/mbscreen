@@ -142,22 +142,53 @@ class FrontendController extends Controller
       /*
       * Instagram
       */
-      $instagram = new Instagram('1771883507.1677ed0.29e446a8da944504b11136eecb84d5fb');
-      $recentFeed = $instagram->get();
+      $isntaConfig = Social::where('social', 'Instagram')->first();
+      if($isntaConfig) {
 
-      mb_internal_encoding("UTF-8");
-      foreach ($recentFeed as $instaPost) {
-        $created = (isset($instaPost->created_time)) ? $instaPost->created_time : 0;
+        // 1771883507.4f0be6a.ccec6206effb4d6785088cec5218ffb6
+        // MB Secret - es müssen alle User als Sandbox User eingetragen werden.
+        // 1771883507.1677ed0.29e446a8da944504b11136eecb84d5fb alt
 
-        $posts[] = [
-          'portal' => 'instagram',
-          'message' => mb_substr($instaPost->caption->text, 0, 85) . '...',
-          'post_id' => 'id',
-          'picture' => $instaPost->images->standard_resolution->url,
-          'created' => $created
-        ];
+
+        $instagram = new Instagram('1771883507.4f0be6a.ccec6206effb4d6785088cec5218ffb6');
+
+        $instaPages = SocialInstance::where('social_id', $isntaConfig->id)->get();
+
+        foreach ($instaPages as $page) {
+
+          /*
+          * Nur die internen Socials anzeigen
+          */
+          if($page->use_wall != 'val') {
+            continue;
+          }
+
+          if(!empty($page->page_id)) {
+            $recentFeed = $instagram->get($page->page_id);
+
+            mb_internal_encoding("UTF-8");
+            foreach ($recentFeed as $instaPost) {
+              $created = (isset($instaPost->created_time)) ? $instaPost->created_time : 0;
+
+              $posts[] = [
+                'portal' => 'instagram',
+                'message' => mb_substr($instaPost->caption->text, 0, 85) . '...',
+                'post_id' => 'id',
+                'picture' => $instaPost->images->standard_resolution->url,
+                'created' => $created
+              ];
+
+            }
+          }
+
+
+        }
 
       }
+
+
+
+
 
       usort($posts, function ($item1, $item2) {
         return $item2['created'] <=> $item1['created'];
@@ -349,6 +380,54 @@ class FrontendController extends Controller
             }
           }
         }
+      }
+
+      /*
+      * Instagram
+      */
+      $isntaConfig = Social::where('social', 'Instagram')->first();
+      if($isntaConfig) {
+
+        // 1771883507.4f0be6a.ccec6206effb4d6785088cec5218ffb6
+        // MB Secret - es müssen alle User als Sandbox User eingetragen werden.
+        // 1771883507.1677ed0.29e446a8da944504b11136eecb84d5fb alt
+
+
+        $instagram = new Instagram('1771883507.4f0be6a.ccec6206effb4d6785088cec5218ffb6');
+
+        $instaPages = SocialInstance::where('social_id', $isntaConfig->id)->get();
+
+        foreach ($instaPages as $page) {
+
+          /*
+          * Nur die internen Socials anzeigen
+          */
+          if($page->use_wall == 'val') {
+            continue;
+          }
+
+          if(!empty($page->page_id)) {
+            $recentFeed = $instagram->get($page->page_id);
+
+            mb_internal_encoding("UTF-8");
+            foreach ($recentFeed as $instaPost) {
+              $created = (isset($instaPost->created_time)) ? $instaPost->created_time : 0;
+
+              $posts[] = [
+                'portal' => 'instagram',
+                'message' => mb_substr($instaPost->caption->text, 0, 85) . '...',
+                'post_id' => 'id',
+                'picture' => $instaPost->images->standard_resolution->url,
+                'created' => $created,
+                'belongs_to' => $page->title
+              ];
+
+            }
+          }
+
+
+        }
+
       }
 
       usort($posts, function ($item1, $item2) {

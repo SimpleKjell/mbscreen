@@ -34,6 +34,8 @@ class CreateKampagnesTable extends Migration
           $table->text('insta_kpi_kommentare')->nullable();
           $table->text('insta_kpi_teilungen')->nullable();
           $table->text('insta_kpi_vid_views')->nullable();
+          $table->text('category')->nullable();
+          $table->text('art')->nullable();
           $table->timestamps();
         });
     }

@@ -111,6 +111,8 @@ class KampagnenController extends Controller
         $kampagne->insta_kpi_kommentare = $request->input('insta_kpi_kommentare');
         $kampagne->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
         $kampagne->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
+        $kampagne->category = $request->input('category');
+        $kampagne->art = $request->input('art');
 
 
         $kampagne->save();
@@ -239,7 +241,8 @@ class KampagnenController extends Controller
       $kampagne->insta_kpi_kommentare = $request->input('insta_kpi_kommentare');
       $kampagne->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
       $kampagne->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
-
+      $kampagne->category = $request->input('category');
+      $kampagne->art = $request->input('art');
       $kampagne->save();
 
       return redirect('/admin/kampagnen')->with('success', 'Kampagne bearbeitet.');

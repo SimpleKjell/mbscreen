@@ -20,6 +20,17 @@
     {{Form::label('title', 'Title')}}
     {{Form::text('title', $kampagne->title, ['class' => 'form-control', 'placeholder' => 'Title der Kampagne'])}}
   </div>
+
+  <div class="form-group marginTopMedium">
+    {{Form::label('category', 'Kategorie')}}
+    {{Form::select('category', ['Kampagne', 'Website', 'Gamification', 'Social Media Kampagne'], $kampagne->category, ['class' =>  'form-control'])}}
+  </div>
+
+  <div class="form-group marginTopMedium">
+    {{Form::label('art', 'Art / Geräte')}}
+    {{Form::select('art', ['Mobil', 'Desktop', 'Mobil & Desktop', 'Social Media'], $kampagne->art, ['class' =>  'form-control'])}}
+  </div>
+
   <hr>
   <h3 class="marginTopMedium">Textcontent</h3>
   <div class="row">

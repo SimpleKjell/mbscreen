@@ -11,6 +11,13 @@
     {!! Form::open(['action' => ['SocialInstancesController@store', $social->id], 'method' => 'POST'] ) !!}
 
 
+      @if($kunden)
+        <div class="form-group marginTopMedium">
+          {{Form::label('kunden_id', 'Kunde')}}
+          {{Form::select('kunden_id', $kunden, Null, ['class' =>  'form-control'])}}
+        </div>
+      @endif
+
       <div class="form-group">
         {{Form::label('page_id', 'Pages')}}
         {{Form::select('page_id', $pages, NULL, ['class' => 'form-control'])}}

@@ -203,7 +203,7 @@ ul.row.carousel-indicators {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#326273', endColorstr='#193a55',GradientType=0 ); /* IE6-9 */
 }
 
-.social-container .card {
+.social-container .card, .live-container .card {
   border-radius: 20px;
   overflow: hidden;
   border: 0px;
@@ -220,11 +220,11 @@ ul.row.carousel-indicators {
 .social-container .card .card-img-top {
   background-color: #fff;
 }
-.social-container .card div.card-img-top {
+.social-container .card div.card-img-top, .live-container .card div.card-img-top {
   background-position: center;
   background-size: cover;
 }
-.social-container .card .card-img-top img {
+.social-container .card .card-img-top img, .live-container .card div.card-img-top img {
   visibility: hidden;
 }
 .social-container .twitter {
@@ -239,7 +239,7 @@ ul.row.carousel-indicators {
   // background-color: #003569;
   // color: #fff;
 }
-.social-container .card .social-icon {
+.social-container .card .social-icon{
   text-align: right;
   padding: 5px 10px;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -249,13 +249,15 @@ ul.row.carousel-indicators {
   right: 0;
   bottom: 0;
 }
-.social-container .card .social-icon img {
+.social-container .card .social-icon img, .live-container .card .social-icon img{
   max-width: 20px;
 }
 .social-container .card-deck {
   margin-left: 0;
 }
-
+.card-body .date {
+  color: rgb(131, 141, 143);
+}
 
 /*
 * Social Media NEws
@@ -293,4 +295,52 @@ ul.row.carousel-indicators {
 }
 .mb-step-content-container {
   // height: 78vh;
+}
+
+/*
+* Liveseite
+*/
+.live-container {
+  background-color: #fff;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.38);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.38);
+  box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.38);
+}
+.live-container .twitter {
+  // background-color: rgba(72, 170, 230, 0.2);
+}
+.live-container .card .social-icon {
+  text-align: right;
+  padding: 5px 10px;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color: #333;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+height: 30px;
+}
+.live-container .card .social-icon:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 65px 65px 0;
+  border-color: transparent #e5e033 transparent transparent;
+}
+.live-container .card.twitter .social-icon:after {
+  border-color: transparent #4AA1F1 transparent transparent;
+}
+.live-container .card.facebook .social-icon:after {
+  border-color: transparent #44599B transparent transparent;
+}
+.live-container .card .social-icon img {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

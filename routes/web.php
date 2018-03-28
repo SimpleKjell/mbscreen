@@ -23,15 +23,17 @@
 Route::get('/mediabrothers', 'FrontendController@showSocialStream');
 Route::get('/social-news', 'FrontendController@showSocialNews');
 Route::get('/', 'FrontendController@showKampagnen');
+Route::get('/aktuell', 'FrontendController@showLive');
 
 
 
-Route::get('/aktuell', function () {
-    return view('frontend.aktuell');
-});
-Route::get('/welcome', function () {
-    return view('frontend.welcome');
-});
+
+// Route::get('/aktuell', function () {
+//     return view('frontend.aktuell');
+// });
+// Route::get('/welcome', function () {
+//     return view('frontend.welcome');
+// });
 
 Auth::routes();
 

@@ -27,16 +27,21 @@
         <th scope="col">ID</th>
         <th scope="col">Name der Page</th>
         <th scope="col">Anzahl anzuzeigender Posts</th>
+        <th scope="col">Kunde</th>
+        <th scope="col">Intern</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       @foreach($social->socialInstances as $instance)
-
+        <?php $kunde = $instance->kunde()->first(); ?>
         <tr>
           <th scope="row">{{$instance->id}}</th>
           <td>{{$instance->title}}</td>
           <td>{{$instance->anz_posts}}</td>
+          <td>{{($kunde) ? $kunde->title : ''}}</td>
+          <td>{{($instance->use_wall == "val") ? 'Ja' : 'Nein'}}</td>
+
           <td>
             <div class="float-right">
               <a href="/admin/socials/{{$social->id}}/i/{{$instance->id}}/edit" class="btn btn-info">Bearbeiten</a>

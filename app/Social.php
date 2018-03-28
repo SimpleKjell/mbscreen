@@ -16,10 +16,10 @@ class Social extends Model
   protected $fillable = ['id', 'social', 'auth', 'key', 'pub'];
 
   /**
-     * Get the comments for the blog post.
-     */
-    public function socialInstances()
-    {
-        return $this->hasMany('App\SocialInstance');
-    }
+   * Get the comments for the blog post.
+   */
+  public function socialInstances()
+  {
+      return $this->hasMany('App\SocialInstance');
+  }
 }

@@ -98,6 +98,20 @@ class KampagnenController extends Controller
         $kampagne->text_3 = $request->input('text_3');
         $kampagne->kunden_id = $request->input('kunden_id');
 
+        $kampagne->web_kpi_nutzer = $request->input('web_kpi_nutzer');
+        $kampagne->web_kpi_aufrufe = $request->input('web_kpi_aufrufe');
+        $kampagne->fb_kpi_reichweite = $request->input('fb_kpi_reichweite');
+        $kampagne->fb_kpi_impressionen = $request->input('fb_kpi_impressionen');
+        $kampagne->fb_kpi_likes = $request->input('fb_kpi_likes');
+        $kampagne->fb_kpi_kommentare = $request->input('fb_kpi_kommentare');
+        $kampagne->fb_kpi_teilungen = $request->input('fb_kpi_teilungen');
+        $kampagne->fb_kpi_vid_views = $request->input('fb_kpi_vid_views');
+        $kampagne->insta_kpi_reichweite = $request->input('insta_kpi_reichweite');
+        $kampagne->insta_kpi_likes = $request->input('insta_kpi_likes');
+        $kampagne->insta_kpi_kommentare = $request->input('insta_kpi_kommentare');
+        $kampagne->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
+        $kampagne->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
+
 
         $kampagne->save();
 
@@ -211,6 +225,21 @@ class KampagnenController extends Controller
       $kampagne->text_2 = $request->input('text_2');
       $kampagne->text_3 = $request->input('text_3');
       $kampagne->kunden_id = $request->input('kunden_id');
+
+      $kampagne->web_kpi_nutzer = $request->input('web_kpi_nutzer');
+      $kampagne->web_kpi_aufrufe = $request->input('web_kpi_aufrufe');
+      $kampagne->fb_kpi_reichweite = $request->input('fb_kpi_reichweite');
+      $kampagne->fb_kpi_impressionen = $request->input('fb_kpi_impressionen');
+      $kampagne->fb_kpi_likes = $request->input('fb_kpi_likes');
+      $kampagne->fb_kpi_kommentare = $request->input('fb_kpi_kommentare');
+      $kampagne->fb_kpi_teilungen = $request->input('fb_kpi_teilungen');
+      $kampagne->fb_kpi_vid_views = $request->input('fb_kpi_vid_views');
+      $kampagne->insta_kpi_reichweite = $request->input('insta_kpi_reichweite');
+      $kampagne->insta_kpi_likes = $request->input('insta_kpi_likes');
+      $kampagne->insta_kpi_kommentare = $request->input('insta_kpi_kommentare');
+      $kampagne->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
+      $kampagne->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
+
       $kampagne->save();
 
       return redirect('/admin/kampagnen')->with('success', 'Kampagne bearbeitet.');

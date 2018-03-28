@@ -15,20 +15,7 @@ class CreateKundesTable extends Migration
     {
         Schema::create('kundes', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');
-            $table->text('web_kpi_nutzer')->nullable();
-            $table->text('web_kpi_aufrufe')->nullable();
-            $table->text('fb_kpi_reichweite')->nullable();
-            $table->text('fb_kpi_impressionen')->nullable();
-            $table->text('fb_kpi_likes')->nullable();
-            $table->text('fb_kpi_kommentare')->nullable();
-            $table->text('fb_kpi_teilungen')->nullable();
-            $table->text('fb_kpi_vid_views')->nullable();
-            $table->text('insta_kpi_reichweite')->nullable();
-            $table->text('insta_kpi_likes')->nullable();
-            $table->text('insta_kpi_kommentare')->nullable();
-            $table->text('insta_kpi_teilungen')->nullable();
-            $table->text('insta_kpi_vid_views')->nullable();
+            $table->text('title');            
             $table->timestamps();
         });
     }

@@ -43,19 +43,6 @@ class KundenController extends Controller
       // Create Kamapgne
       $kunde = new Kunde;
       $kunde->title = $request->input('title');
-      $kunde->web_kpi_nutzer = $request->input('web_kpi_nutzer');
-      $kunde->web_kpi_aufrufe = $request->input('web_kpi_aufrufe');
-      $kunde->fb_kpi_reichweite = $request->input('fb_kpi_reichweite');
-      $kunde->fb_kpi_impressionen = $request->input('fb_kpi_impressionen');
-      $kunde->fb_kpi_likes = $request->input('fb_kpi_likes');
-      $kunde->fb_kpi_kommentare = $request->input('fb_kpi_kommentare');
-      $kunde->fb_kpi_teilungen = $request->input('fb_kpi_teilungen');
-      $kunde->fb_kpi_vid_views = $request->input('fb_kpi_vid_views');
-      $kunde->insta_kpi_reichweite = $request->input('insta_kpi_reichweite');
-      $kunde->insta_kpi_likes = $request->input('insta_kpi_likes');
-      $kunde->insta_kpi_kommentare = $request->input('insta_kpi_kommentare');
-      $kunde->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
-      $kunde->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
 
       $kunde->save();
 
@@ -101,19 +88,7 @@ class KundenController extends Controller
       // Create Kamapgne
       $kunde = Kunde::find($id);
       $kunde->title = $request->input('title');
-      $kunde->web_kpi_nutzer = $request->input('web_kpi_nutzer');
-      $kunde->web_kpi_aufrufe = $request->input('web_kpi_aufrufe');
-      $kunde->fb_kpi_reichweite = $request->input('fb_kpi_reichweite');
-      $kunde->fb_kpi_impressionen = $request->input('fb_kpi_impressionen');
-      $kunde->fb_kpi_likes = $request->input('fb_kpi_likes');
-      $kunde->fb_kpi_kommentare = $request->input('fb_kpi_kommentare');
-      $kunde->fb_kpi_teilungen = $request->input('fb_kpi_teilungen');
-      $kunde->fb_kpi_vid_views = $request->input('fb_kpi_vid_views');
-      $kunde->insta_kpi_reichweite = $request->input('insta_kpi_reichweite');
-      $kunde->insta_kpi_likes = $request->input('insta_kpi_likes');
-      $kunde->insta_kpi_kommentare = $request->input('insta_kpi_kommentare');
-      $kunde->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
-      $kunde->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
+      
 
       $kunde->save();
 

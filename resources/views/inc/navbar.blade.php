@@ -5,7 +5,7 @@
         <strong>Kampagnen</strong>
       </a>
       <a href="/mediabrothers" class="nav-link d-flex align-items-center {{ Request::path() == 'mediabrothers' ? 'active' : '' }}">
-        <strong>Mediaborthers Feed</strong>
+        <strong>Mediabrothers Feed</strong>
       </a>
       <a href="/social-news" class="nav-link d-flex align-items-center {{ Request::path() == 'social-news' ? 'active' : '' }}">
         <strong>Socialmedia News</strong>

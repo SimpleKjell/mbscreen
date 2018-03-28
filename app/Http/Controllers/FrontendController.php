@@ -31,18 +31,15 @@ class FrontendController extends Controller
 
         foreach ($facebookPages as $facebookPage) {
 
-          $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
-          // FB Call for Page
-          // try {
-          //     $res = $fb->get('/' . $facebookPage->page_id, $facebookConfig->key);
-          // } catch (Facebook\Exceptions\FacebookSDKException $e) {
-          //     dd($e->getMessage());
-          // }
-          //
-          // $body = $res->getDecodedBody();
-          //
-          // var_dump($facebookPage->page_id);
+          /*
+          * Nur die internen Socials anzeigen
+          */
+          if($facebookPage->use_wall != 'val') {
+            continue;
+          }
+
+          $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
 
           try {
@@ -91,6 +88,14 @@ class FrontendController extends Controller
 
         foreach ($twitterPages as $page) {
 
+          /*
+          * Nur die internen Socials anzeigen
+          */
+          if($page->use_wall != 'val') {
+            continue;
+          }
+
+
           $res = Twitter::getUserTimeline(['screen_name' => $page->title, 'count' => $page->anz_posts, 'format' => 'array', 'exclude_replies' => true, 'tweet_mode' => 'extended']);
 
           if($res) {
@@ -125,7 +130,8 @@ class FrontendController extends Controller
                 'message' => $data['full_text'],
                 'post_id' => $data['id'],
                 'picture' => $picture,
-                'created' => $created
+                'created' => $created,
+                'belongs_to' => $page->title
               ];
 
             }
@@ -156,18 +162,6 @@ class FrontendController extends Controller
       usort($posts, function ($item1, $item2) {
         return $item2['created'] <=> $item1['created'];
       });
-
-      // for ($i=0; $i < 5; $i++) {
-      //   $posts[] = [
-      //       'portal' => 'instagram',
-      //       'message' => 'message',
-      //       'post_id' => 'id',
-      //       'picture' => 'http://via.placeholder.com/700x400',
-      //       'created' => 123
-      //     ];
-      // }
-
-      // $posts = array_chunk($posts, 3);
 
       $data = [
         'posts' => $posts
@@ -231,6 +225,142 @@ class FrontendController extends Controller
       $kampagnen = Kampagne::all();
 
       return view('frontend.kampagnen')->with('kampagnen', $kampagnen);
+    }
+
+    public function showLive()
+    {
+
+      $posts = [];
+
+      /*
+      * Facebook
+      */
+      $facebookConfig = Social::where('social', 'Facebook')->first();
+      if($facebookConfig) {
+
+        $facebookPages = SocialInstance::where('social_id', $facebookConfig->id)->get();
+
+        foreach ($facebookPages as $facebookPage) {
+
+
+          /*
+          * Nur die internen Socials anzeigen
+          */
+          if($facebookPage->use_wall == 'val') {
+            continue;
+          }
+
+          $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+
+          try {
+              $res = $fb->get('/' . $facebookPage->page_id . '/posts?limit='.$facebookPage->anz_posts.'&fields=message,id,picture,full_picture,created_time', $facebookConfig->key);
+          } catch (Facebook\Exceptions\FacebookSDKException $e) {
+              dd($e->getMessage());
+          }
+
+
+
+          $body = $res->getDecodedBody();
+
+
+
+          if(is_array($body)) {
+            foreach ($body['data'] as $data) {
+
+              /*
+              * Erstellt
+              */
+              $created = 0;
+              if(isset($data['created_time'])) {
+                $created = strtotime($data['created_time']);;
+              }
+
+
+              $posts[] = [
+                'portal' => 'facebook',
+                'message' => (isset($data['message'])) ? substr($data['message'], 0, 85) . '...' : '',
+                'post_id' => $data['id'],
+                'picture' => (isset($data['full_picture'])) ? $data['full_picture'] : '',
+                'created' => $created,
+                'belongs_to' => $facebookPage->title
+              ];
+            }
+          }
+        }
+      }
+
+      /*
+      * Twitter
+      */
+      $twitterConfig = Social::where('social', 'Twitter')->first();
+      if($twitterConfig) {
+
+        $twitterPages = SocialInstance::where('social_id', $twitterConfig->id)->get();
+
+        foreach ($twitterPages as $page) {
+
+          /*
+          * Nur die internen Socials anzeigen
+          */
+          if($page->use_wall == 'val') {
+            continue;
+          }
+
+
+          $res = Twitter::getUserTimeline(['screen_name' => $page->title, 'count' => $page->anz_posts, 'format' => 'array', 'exclude_replies' => true, 'tweet_mode' => 'extended']);
+
+          if($res) {
+
+            foreach ($res as $data) {
+
+              $created = 0;
+              if(isset($data['created_at'])) {
+                $created = strtotime($data['created_at']);
+              }
+              /*
+              * Picture of Tweet
+              */
+              $picture = '';
+              if(isset($data['entities']['media'])) {
+                if(is_array($data['entities']['media'])) {
+                  if(isset($data['entities']['media'][0])) {
+                    if(isset($data['entities']['media'][0]['media_url'])) {
+                      $picture = $data['entities']['media'][0]['media_url'];
+                    }
+                  }
+                } else {
+                  if(isset($data['entities']['media']['media_url'])) {
+                    $picture = $data['entities']['media']['media_url'];
+                  }
+                }
+
+              }
+
+              $posts[] = [
+                'portal' => 'twitter',
+                'message' => $data['full_text'],
+                'post_id' => $data['id'],
+                'picture' => $picture,
+                'created' => $created,
+                'belongs_to' => $data['user']['name']
+              ];
+
+            }
+          }
+        }
+      }
+
+      usort($posts, function ($item1, $item2) {
+        return $item2['created'] <=> $item1['created'];
+      });
+
+      $data = [
+        'posts' => $posts
+      ];
+
+      return view('frontend.aktuell')->with($data);
+
     }
 
 }

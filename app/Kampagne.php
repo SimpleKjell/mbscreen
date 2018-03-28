@@ -35,8 +35,8 @@ class Kampagne extends Model implements HasMedia
   /**
    * Get the Social that owns the Instance.
    */
-  public function user()
+  public function kunde()
   {
-      return $this->belongsTo('App\Kunde');
+      return $this->belongsTo('App\Kunde', 'kunden_id');
   }
 }

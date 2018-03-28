@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Social;
+use App\Kunde;
 use Illuminate\Http\Request;
 use App\SocialInstance;
 use Vinkla\Instagram\Instagram;
@@ -70,9 +71,20 @@ class SocialInstancesController extends Controller
         }
       }
 
+
+      $kunden = Kunde::orderBy('id', 'desc')->get();
+
+      $kundenSelect = [];
+      if($kunden) {
+        foreach ($kunden as $kunde) {
+          $kundenSelect[$kunde->id] = $kunde->title;
+        }
+      }
+
       $data = [
         'pages' => $pages,
-        'social' => $social
+        'social' => $social,
+        'kunden' => $kundenSelect
       ];
 
       return view('socials.instances.create')->with($data);
@@ -139,6 +151,7 @@ class SocialInstancesController extends Controller
       $socialInstance->social_id = $id;
       $socialInstance->anz_posts = $request->input('anz_posts');
       $socialInstance->page_id = $pageId;
+      $socialInstance->kunden_id = $request->input('kunden_id');
 
 
       $socialInstance->save();
@@ -169,9 +182,20 @@ class SocialInstancesController extends Controller
     {
         $socialInstance = SocialInstance::find($id);
 
+        $kunden = Kunde::orderBy('id', 'desc')->get();
+
+        $kundenSelect = [];
+        if($kunden) {
+          foreach ($kunden as $kunde) {
+            $kundenSelect[$kunde->id] = $kunde->title;
+          }
+        }
+
+
         $data = [
           'socialInstance' => $socialInstance,
-          'sId' => $sId
+          'sId' => $sId,
+          'kunden' => $kundenSelect
         ];
 
 
@@ -195,7 +219,8 @@ class SocialInstancesController extends Controller
       } else {
         $socialInstance->use_wall = '';
       }
-
+      
+      $socialInstance->kunden_id = $request->input('kunden_id');
       $socialInstance->save();
 
       return redirect('/admin/socials/' . $sId )->with('success', 'Update erfolgreich.');

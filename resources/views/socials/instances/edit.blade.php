@@ -5,19 +5,31 @@
   <h1>{{$socialInstance->title}}</h1>
 
   {!! Form::open(['action' => ['SocialInstancesController@update', $sId, $socialInstance->id], 'method' => 'POST'] ) !!}
-      <div class="form-group">
-        {{Form::label('anz_posts', 'Anzahl Posts')}}
-        {{Form::number('anz_posts', $socialInstance->anz_posts, ['class' => 'form-control', 'max' => 10, 'placeholder' => '10'])}}
+
+
+    @if($kunden)
+      <div class="form-group marginTopMedium">
+        {{Form::label('kunden_id', 'Kunde')}}
+        {{Form::select('kunden_id', $kunden, $socialInstance->kunden_id, ['class' =>  'form-control'])}}
       </div>
+    @endif
 
-      <!-- <div class="form-group">
-        {{Form::checkbox('use_wall', 'val', NULL, ['class' => '', ($socialInstance->use_wall == "val") ? 'checked' : '', 'id' => 'use_wall'])}}
-        {{Form::label('use_wall', 'Für die Social Wall benutzen')}}
-      </div> -->
+    <div class="form-group">
+      {{Form::label('anz_posts', 'Anzahl Posts')}}
+      {{Form::number('anz_posts', $socialInstance->anz_posts, ['class' => 'form-control', 'max' => 10, 'placeholder' => '10'])}}
+    </div>
 
-      {{Form::hidden('_method', 'PUT')}}
-      {{Form::submit('Bearbeiten', ['class' => 'btn btn-info btn-block'])}}
-      <a href="{{ url()->previous() }}" class="btn btn-secondary marginTopMedium">Zurück</a>
+    <div class="form-group">
+      {{Form::checkbox('use_wall', 'val', NULL, ['class' => '', ($socialInstance->use_wall == "val") ? 'checked' : '', 'id' => 'use_wall'])}}
+      {{Form::label('use_wall', 'Für die eigene Social Wall benutzen')}}
+      <p>
+        Wenn diese Option gewählt ist, erscheinen die Posts nur auf der eigenen Social Wall, unter <b>Mediabrothers Feed</b>.
+      </p>
+    </div>
+
+    {{Form::hidden('_method', 'PUT')}}
+    {{Form::submit('Bearbeiten', ['class' => 'btn btn-info btn-block marginTopMedium'])}}
+    <a href="{{ url()->previous() }}" class="btn btn-secondary marginTopMedium">Zurück</a>
   {!! Form::close() !!}
 
 @endsection

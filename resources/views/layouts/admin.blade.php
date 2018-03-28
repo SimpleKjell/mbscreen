@@ -28,6 +28,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                       <li>
+                        <a class="nav-link" href="/admin/kunden">Kunden</a>
+                      </li>
+                      <li>
                         <a class="nav-link" href="/admin/kampagnen">Kampagnen</a>
                       </li>
                       <li>

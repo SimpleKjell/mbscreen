@@ -7,6 +7,15 @@
   {!! Form::open(['action' => ['KampagnenController@update', $kampagne->id], 'method' => 'POST', 'enctype' => 'multipart/form-data'] ) !!}
   <hr>
   <h3 class="marginTopMedium">Bezeichnung</h3>
+
+
+  @if($kunden)  
+  <div class="form-group marginTopMedium">
+    {{Form::label('kunden_id', 'Kunde')}}
+    {{Form::select('kunden_id', $kunden, $kampagne->kunden_id, ['class' =>  'form-control'])}}
+  </div>
+  @endif
+
   <div class="form-group marginTopMedium">
     {{Form::label('title', 'Title')}}
     {{Form::text('title', $kampagne->title, ['class' => 'form-control', 'placeholder' => 'Title der Kampagne'])}}

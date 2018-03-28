@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kampagne;
+use App\Kunde;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +28,21 @@ class KampagnenController extends Controller
      */
     public function create()
     {
-      return view('kampagnen.create');
+
+      $kunden = Kunde::orderBy('id', 'desc')->get();
+
+      $kundenSelect = [];
+      if($kunden) {
+        foreach ($kunden as $kunde) {
+          $kundenSelect[$kunde->id] = $kunde->title;
+        }
+      }
+
+      $data = [
+        'kunden' => $kundenSelect
+      ];
+
+      return view('kampagnen.create')->with($data);
     }
 
     /**
@@ -81,6 +96,8 @@ class KampagnenController extends Controller
         $kampagne->text_1 = $request->input('text_1');
         $kampagne->text_2 = $request->input('text_2');
         $kampagne->text_3 = $request->input('text_3');
+        $kampagne->kunden_id = $request->input('kunden_id');
+
 
         $kampagne->save();
 
@@ -95,7 +112,6 @@ class KampagnenController extends Controller
      */
     public function show($id)
     {
-
       $kampagne = Kampagne::find($id);
       return view('kampagnen.show')->with('kampagne', $kampagne);
     }
@@ -109,8 +125,21 @@ class KampagnenController extends Controller
     public function edit($id)
     {
         $kampagne = Kampagne::find($id);
+        $kunden = Kunde::orderBy('id', 'desc')->get();
 
-        return view('kampagnen.edit')->with('kampagne', $kampagne);
+        $kundenSelect = [];
+        if($kunden) {
+          foreach ($kunden as $kunde) {
+            $kundenSelect[$kunde->id] = $kunde->title;
+          }
+        }
+
+        $data = [
+          'kunden' => $kundenSelect,
+          'kampagne' => $kampagne
+        ];
+
+        return view('kampagnen.edit')->with($data);
     }
 
     /**
@@ -129,7 +158,6 @@ class KampagnenController extends Controller
       // Update Kamapgne
       $kampagne = Kampagne::find($id);
       $kampagne->title = $request->input('title');
-
 
       // Media
       if(!is_null($request['image_main'])) {
@@ -182,6 +210,7 @@ class KampagnenController extends Controller
       $kampagne->text_1 = $request->input('text_1');
       $kampagne->text_2 = $request->input('text_2');
       $kampagne->text_3 = $request->input('text_3');
+      $kampagne->kunden_id = $request->input('kunden_id');
       $kampagne->save();
 
       return redirect('/admin/kampagnen')->with('success', 'Kampagne bearbeitet.');

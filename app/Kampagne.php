@@ -31,4 +31,12 @@ class Kampagne extends Model implements HasMedia
       ->width(700)
       ->height(700);
   }
+
+  /**
+   * Get the Social that owns the Instance.
+   */
+  public function user()
+  {
+      return $this->belongsTo('App\Kunde');
+  }
 }

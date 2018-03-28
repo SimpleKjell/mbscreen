@@ -37,6 +37,7 @@ Auth::routes();
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
 
+Route::resource('admin/kunden', 'KundenController')->middleware('auth');
 
 Route::resource('admin/kampagnen', 'KampagnenController', [
   'names' => [

@@ -7,6 +7,7 @@ use App\Social;
 use Illuminate\Http\Request;
 use App\SocialInstance;
 use Vinkla\Instagram\Instagram;
+use Illuminate\Support\Facades\Input;
 
 class SocialInstancesController extends Controller
 {
@@ -188,6 +189,13 @@ class SocialInstancesController extends Controller
     {
       $socialInstance = SocialInstance::find($id);
       $socialInstance->anz_posts = $request->input('anz_posts');
+
+      if(!is_null(Input::get('use_wall'))) {
+        $socialInstance->use_wall = Input::get('use_wall');
+      } else {
+        $socialInstance->use_wall = '';
+      }
+
       $socialInstance->save();
 
       return redirect('/admin/socials/' . $sId )->with('success', 'Update erfolgreich.');

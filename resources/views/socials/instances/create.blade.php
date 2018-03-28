@@ -16,8 +16,6 @@
         {{Form::select('page_id', $pages, NULL, ['class' => 'form-control'])}}
       </div>
 
-
-
       {{Form::hidden('social_id', $social->id)}}
       {{Form::hidden('anz_posts', '10')}}
 

@@ -20,6 +20,7 @@ class CreateSocialInstancesTable extends Migration
           $table->text('desc');
           $table->text('social_id');
           $table->text('anz_posts');
+          $table->text('use_wall');
           $table->text('page_id');
           $table->timestamps();
         });

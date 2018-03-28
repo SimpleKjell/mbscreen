@@ -20,6 +20,7 @@ class CreateKampagnesTable extends Migration
           $table->mediumText('text_2')->nullable();
           $table->mediumText('text_3')->nullable();
           $table->mediumText('text_4')->nullable();
+          $table->text('kunden_id')->nullable();
           $table->timestamps();
         });
     }

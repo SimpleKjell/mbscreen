@@ -78,7 +78,7 @@
     </div>
     <div class="col">
       <div class="form-group marginTopMedium">
-        <?php $media = $kampagne->getFirstMedia('side');
+        <?php $url = ''; $media = $kampagne->getFirstMedia('side');
         if(!is_null($media)) {
           $url = $media->getUrl();
         } ?>
@@ -89,7 +89,7 @@
     </div>
     <div class="col">
       <div class="form-group marginTopMedium">
-        <?php $media = $kampagne->getFirstMedia('side_2');
+        <?php $url = ''; $media = $kampagne->getFirstMedia('side_2');
         if(!is_null($media)) {
           $url = $media->getUrl();
 
@@ -101,7 +101,7 @@
     </div>
     <div class="col">
       <div class="form-group marginTopMedium">
-        <?php $media = $kampagne->getFirstMedia('square');
+        <?php $url = ''; $media = $kampagne->getFirstMedia('square');
         if(!is_null($media)) {
           $url = $media->getUrl();
         } ?>

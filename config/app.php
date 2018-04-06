@@ -151,6 +151,7 @@ return [
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
         Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
+        Plank\Mediable\MediableServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -218,6 +219,7 @@ return [
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
         'Trello' => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
+        'MediaUploader' => Plank\Mediable\MediaUploaderFacade::class,
     ],
 
 ];

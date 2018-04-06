@@ -66,9 +66,9 @@
       <div class="form-group marginTopMedium">
         <?php
         $url = '';
-        $media = $kampagne->getFirstMedia('main');
-        if(!is_null($media)) {
-          $url = $media->getUrl();
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_main')->first())) {
+          $url = $kampagne->getMedia('image_main')->first()->getUrl();
         }
         ?>
         {{Form::label('cover_image', 'Bild 1 (1200x720)')}}<br>
@@ -78,10 +78,13 @@
     </div>
     <div class="col">
       <div class="form-group marginTopMedium">
-        <?php $url = ''; $media = $kampagne->getFirstMedia('side');
-        if(!is_null($media)) {
-          $url = $media->getUrl();
-        } ?>
+        <?php
+        $url = '';
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_side')->first())) {
+          $url = $kampagne->getMedia('image_side')->first()->getUrl();
+        }
+        ?>
         {{Form::label('image_side', 'Bild 2 (1200x623)')}}<br>
         <img src="<?php echo $url;?>" alt="">
         {{Form::file('image_side')}}
@@ -89,11 +92,13 @@
     </div>
     <div class="col">
       <div class="form-group marginTopMedium">
-        <?php $url = ''; $media = $kampagne->getFirstMedia('side_2');
-        if(!is_null($media)) {
-          $url = $media->getUrl();
-
-        } ?>
+        <?php
+        $url = '';
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_side_2')->first())) {
+          $url = $kampagne->getMedia('image_side_2')->first()->getUrl();
+        }
+        ?>
         {{Form::label('cover_image', 'Bild 3 (1200x623)')}}<br>
         <img src="<?php echo $url;?>" alt="">
         {{Form::file('image_side_2')}}
@@ -101,10 +106,13 @@
     </div>
     <div class="col">
       <div class="form-group marginTopMedium">
-        <?php $url = ''; $media = $kampagne->getFirstMedia('square');
-        if(!is_null($media)) {
-          $url = $media->getUrl();
-        } ?>
+        <?php
+        $url = '';
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_square')->first())) {
+          $url = $kampagne->getMedia('image_square')->first()->getUrl();
+        }
+        ?>
         {{Form::label('image_square', 'Bild Quadrat (700x700)')}}<br>
         <img src="<?php echo $url;?>" alt="">
         {{Form::file('image_square')}}

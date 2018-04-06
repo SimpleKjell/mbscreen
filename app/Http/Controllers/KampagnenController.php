@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kampagne;
 use App\Kunde;
+use MediaUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,6 +54,16 @@ class KampagnenController extends Controller
      */
     public function store(Request $request)
     {
+
+
+      // https://github.com/plank/laravel-mediable
+      // Alternative??
+
+
+
+
+
+
         $this->validate($request, [
           'title' => 'required',
           // 'desc' => 'required',
@@ -67,31 +78,32 @@ class KampagnenController extends Controller
 
         $kampagne->title = $request->input('title');
 
-        // Media
-        if(!is_null($request['image_main'])) {
 
-          $kampagne
-            ->addMediaFromRequest('image_main')
-            ->toMediaCollection('main');
 
-            // var_dump('ja');
-            // exit();
-        }
-        if(!is_null($request['image_side'])) {
-          $kampagne
-            ->addMediaFromRequest('image_side')
-            ->toMediaCollection('side');
-        }
-        if(!is_null($request['image_side_2'])) {
-          $kampagne
-            ->addMediaFromRequest('image_side_2')
-            ->toMediaCollection('side_2');
-        }
-        if(!is_null($request['image_square'])) {
-          $kampagne
-            ->addMediaFromRequest('image_square')
-            ->toMediaCollection('square');
-        }
+        // if(!is_null($request['image_main'])) {
+        //
+        //   $kampagne
+        //     ->addMediaFromRequest('image_main')
+        //     ->toMediaCollection('main');
+        //
+        //     // var_dump('ja');
+        //     // exit();
+        // }
+        // if(!is_null($request['image_side'])) {
+        //   $kampagne
+        //     ->addMediaFromRequest('image_side')
+        //     ->toMediaCollection('side');
+        // }
+        // if(!is_null($request['image_side_2'])) {
+        //   $kampagne
+        //     ->addMediaFromRequest('image_side_2')
+        //     ->toMediaCollection('side_2');
+        // }
+        // if(!is_null($request['image_square'])) {
+        //   $kampagne
+        //     ->addMediaFromRequest('image_square')
+        //     ->toMediaCollection('square');
+        // }
 
         $kampagne->text_1 = $request->input('text_1');
         $kampagne->text_2 = $request->input('text_2');
@@ -116,6 +128,42 @@ class KampagnenController extends Controller
 
 
         $kampagne->save();
+
+        // Media
+        if(!is_null($request['image_main'])) {
+
+            $media = MediaUploader::fromSource($request->file('image_main'))
+            ->toDirectory('/uploads')
+            ->upload();
+            // var_dump($media);
+            // exit();
+
+            $kampagne->attachMedia($media, ['image_main']);
+        }
+        if(!is_null($request['image_side'])) {
+
+            $media = MediaUploader::fromSource($request->file('image_side'))
+            ->toDirectory('/uploads')
+            ->upload();
+
+            $kampagne->syncMedia($media, ['image_side']);
+        }
+        if(!is_null($request['image_side_2'])) {
+
+            $media = MediaUploader::fromSource($request->file('image_side_2'))
+            ->toDirectory('/uploads')
+            ->upload();
+
+            $kampagne->syncMedia($media, ['image_side_2']);
+        }
+        if(!is_null($request['image_square'])) {
+
+            $media = MediaUploader::fromSource($request->file('image_square'))
+            ->toDirectory('/uploads')
+            ->upload();
+
+            $kampagne->syncMedia($media, ['image_square']);
+        }
 
         return redirect('/admin/kampagnen')->with('success', 'Kampagne erstellt.');
     }
@@ -178,50 +226,84 @@ class KampagnenController extends Controller
       // Media
       if(!is_null($request['image_main'])) {
 
-        // Lösche Media
-        $mainMedia = $kampagne->getFirstMedia('main');
-        if(!is_null($mainMedia)) {
-          $mainMedia->delete();
-        }
+          $media = MediaUploader::fromSource($request->file('image_main'))
+          ->toDirectory('/uploads')
+          ->upload();
 
-        $kampagne
-          ->addMediaFromRequest('image_main')
-          ->toMediaCollection('main');
+          $kampagne->syncMedia($media, ['image_main']);
       }
       if(!is_null($request['image_side'])) {
 
-        // Lösche Media
-        $media = $kampagne->getFirstMedia('side');
-        if(!is_null($media)) {
-          $media->delete();
-        }
+          $media = MediaUploader::fromSource($request->file('image_side'))
+          ->toDirectory('/uploads')
+          ->upload();
 
-        $kampagne
-          ->addMediaFromRequest('image_side')
-          ->toMediaCollection('side');
+          $kampagne->syncMedia($media, ['image_side']);
       }
       if(!is_null($request['image_side_2'])) {
 
-        // Lösche Media
-        $media = $kampagne->getFirstMedia('side_2');
-        if(!is_null($media)) {
-          $media->delete();
-        }
-        $kampagne
-          ->addMediaFromRequest('image_side_2')
-          ->toMediaCollection('side_2');
+          $media = MediaUploader::fromSource($request->file('image_side_2'))
+          ->toDirectory('/uploads')
+          ->upload();
+
+          $kampagne->syncMedia($media, ['image_side_2']);
       }
       if(!is_null($request['image_square'])) {
 
-        // Lösche Media
-        $media = $kampagne->getFirstMedia('square');
-        if(!is_null($media)) {
-          $media->delete();
-        }
-        $kampagne
-          ->addMediaFromRequest('image_square')
-          ->toMediaCollection('square');
+          $media = MediaUploader::fromSource($request->file('image_square'))
+          ->toDirectory('/uploads')
+          ->upload();
+
+          $kampagne->syncMedia($media, ['image_square']);
       }
+
+
+      // if(!is_null($request['image_main'])) {
+      //
+      //   // Lösche Media
+      //   $mainMedia = $kampagne->getFirstMedia('main');
+      //   if(!is_null($mainMedia)) {
+      //     $mainMedia->delete();
+      //   }
+      //
+      //   $kampagne
+      //     ->addMediaFromRequest('image_main')
+      //     ->toMediaCollection('main');
+      // }
+      // if(!is_null($request['image_side'])) {
+      //
+      //   // Lösche Media
+      //   $media = $kampagne->getFirstMedia('side');
+      //   if(!is_null($media)) {
+      //     $media->delete();
+      //   }
+      //
+      //   $kampagne
+      //     ->addMediaFromRequest('image_side')
+      //     ->toMediaCollection('side');
+      // }
+      // if(!is_null($request['image_side_2'])) {
+      //
+      //   // Lösche Media
+      //   $media = $kampagne->getFirstMedia('side_2');
+      //   if(!is_null($media)) {
+      //     $media->delete();
+      //   }
+      //   $kampagne
+      //     ->addMediaFromRequest('image_side_2')
+      //     ->toMediaCollection('side_2');
+      // }
+      // if(!is_null($request['image_square'])) {
+      //
+      //   // Lösche Media
+      //   $media = $kampagne->getFirstMedia('square');
+      //   if(!is_null($media)) {
+      //     $media->delete();
+      //   }
+      //   $kampagne
+      //     ->addMediaFromRequest('image_square')
+      //     ->toMediaCollection('square');
+      // }
 
       $kampagne->text_1 = $request->input('text_1');
       $kampagne->text_2 = $request->input('text_2');

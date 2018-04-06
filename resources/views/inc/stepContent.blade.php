@@ -22,17 +22,19 @@
     </div>
     <div class="col p-md-3 m-auto h-100">
       <?php $url = 'http://via.placeholder.com/1200x623';
-        $media = $kampagne->getFirstMedia('side');
-        if(!is_null($media)) {
-          $url = $media->getUrl('side');
+
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_side')->first())) {
+          $url = $kampagne->getMedia('image_side')->first()->getUrl();
         } ?>
       <img src="<?php echo $url; ?>" alt="">
     </div>
     <div class="col p-md-3 m-auto h-100">
       <?php $url = 'http://via.placeholder.com/1200x623';
-        $media = $kampagne->getFirstMedia('side_2');
-        if(!is_null($media)) {
-          $url = $media->getUrl('side');
+
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_side_2')->first())) {
+          $url = $kampagne->getMedia('image_side_2')->first()->getUrl();
         } ?>
       <img src="<?php echo $url;?>" alt="">
     </div>
@@ -41,9 +43,9 @@
   <div class="row second-row pb-md-3">
     <div class="col-md-6">
       <?php $url = 'http://via.placeholder.com/1200x720';
-        $media = $kampagne->getFirstMedia('main');
-        if(!is_null($media)) {
-          $url = $media->getUrl('main');
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_main')->first())) {
+          $url = $kampagne->getMedia('image_main')->first()->getUrl();
         } ?>
       <img src="<?php echo $url;?>" alt="">
     </div>
@@ -57,9 +59,9 @@
     </div>
     <div class="col-md-4">
       <?php $url = 'http://via.placeholder.com/700x700';
-        $media = $kampagne->getFirstMedia('square');
-        if(!is_null($media)) {
-          $url = $media->getUrl('square');
+        $media = NULL;
+        if(!is_null($kampagne->getMedia('image_square')->first())) {
+          $url = $kampagne->getMedia('image_square')->first()->getUrl();
         } ?>
       <img src="<?php echo $url;?>" alt="">
     </div>

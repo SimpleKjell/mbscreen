@@ -13,8 +13,8 @@
         "laravelcollective/html": "^5.4.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
+        "plank/laravel-mediable": "^2.6",
         "sammyk/laravel-facebook-sdk": "^3.5",
-        "spatie/laravel-medialibrary": "7.0.0",
         "thujohn/twitter": "^2.2",
         "unisharp/laravel-ckeditor": "^4.7",
         "vinkla/instagram": "^8.0"

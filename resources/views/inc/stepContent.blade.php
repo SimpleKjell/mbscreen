@@ -5,7 +5,7 @@
       <div class="row bg-beige p-4">
         <!--  Projektlogo -->
         <div class="col-md-2 justify-content-center align-self-center">
-          <div class="bg-white">
+          <div class="">
             <?php
             $url = '';
             $media = NULL;

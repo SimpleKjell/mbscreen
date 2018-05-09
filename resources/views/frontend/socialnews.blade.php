@@ -1,6 +1,4 @@
-@extends('layouts.front')
 
-@section('content')
 
   <div class="social-news-container pt-3 pb-3">
 
@@ -36,9 +34,8 @@
             </div>
           @endforeach
         </div>
-        
+
       @endif
 
     </div>
   </div>
-@endsection

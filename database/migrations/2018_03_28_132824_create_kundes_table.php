@@ -15,7 +15,7 @@ class CreateKundesTable extends Migration
     {
         Schema::create('kundes', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');            
+            $table->text('title');
             $table->timestamps();
         });
     }

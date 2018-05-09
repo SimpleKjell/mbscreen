@@ -124,8 +124,31 @@ class KampagnenController extends Controller
         $kampagne->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
         $kampagne->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
         $kampagne->category = $request->input('category');
-        $kampagne->art = $request->input('art');
 
+
+        // Art setzt sich jetzt zusammen:
+        $art = [];
+        $isMobile = $request->input('is_mobile');
+        $art['mobile'] = $isMobile;
+        $isDesktop = $request->input('is_desktop');
+        $art['desktop'] = $isDesktop;
+        $isSocial = $request->input('is_social');
+        $art['social'] = $isSocial;
+        $kampagne->art = json_encode($art);
+
+        $kampagne->image_content_1 = $request->input('image_content_1');
+        $kampagne->image_content_2 = $request->input('image_content_2');
+        $kampagne->image_content_3 = $request->input('image_content_3');
+        $kampagne->image_content_4 = $request->input('image_content_4');
+
+        $kampagne->image_kanal_1 = $request->input('image_kanal_1');
+        $kampagne->image_kanal_2 = $request->input('image_kanal_2');
+        $kampagne->image_kanal_3 = $request->input('image_kanal_3');
+        $kampagne->image_kanal_4 = $request->input('image_kanal_4');
+
+        $kampagne->video_art = $request->input('video_art');
+        $kampagne->video_url = $request->input('video_url');
+        $kampagne->video_duration = $request->input('video_duration');
 
         $kampagne->save();
 
@@ -324,7 +347,38 @@ class KampagnenController extends Controller
       $kampagne->insta_kpi_teilungen = $request->input('insta_kpi_teilungen');
       $kampagne->insta_kpi_vid_views = $request->input('insta_kpi_vid_views');
       $kampagne->category = $request->input('category');
-      $kampagne->art = $request->input('art');
+
+
+      // Art setzt sich jetzt zusammen:
+      $art = [];
+
+      $isMobile = $request->input('is_mobile');
+      $art['mobile'] = $isMobile;
+      $isDesktop = $request->input('is_desktop');
+      $art['desktop'] = $isDesktop;
+      $isSocial = $request->input('is_social');
+      $art['social'] = $isSocial;
+      $kampagne->art = json_encode($art);
+
+
+
+
+      $kampagne->image_content_1 = $request->input('image_content_1');
+      $kampagne->image_content_2 = $request->input('image_content_2');
+      $kampagne->image_content_3 = $request->input('image_content_3');
+      $kampagne->image_content_4 = $request->input('image_content_4');
+
+      $kampagne->image_kanal_1 = $request->input('image_kanal_1');
+      $kampagne->image_kanal_2 = $request->input('image_kanal_2');
+      $kampagne->image_kanal_3 = $request->input('image_kanal_3');
+      $kampagne->image_kanal_4 = $request->input('image_kanal_4');
+
+      $kampagne->video_art = $request->input('video_art');
+      $kampagne->video_url = $request->input('video_url');
+      $kampagne->video_duration = $request->input('video_duration');
+
+
+
       $kampagne->save();
 
       return redirect('/admin/kampagnen')->with('success', 'Kampagne bearbeitet.');

@@ -1,6 +1,4 @@
-@extends('layouts.front')
 
-@section('content')
 
 <div class="live-container paddingTopMedium pb-4 container">
   <div class="container">
@@ -21,7 +19,8 @@
                       <div class=" card {{$post['portal']}}">
                         @if($post['picture'])
                         <div class="card-img-top" style="background-image: url({{$post['picture']}});">
-                          <img class="card-img-top" src="/storage/images/pixel.jpg" alt="">
+                          <!-- <img class="card-img-top" src="/storage/images/pixel.jpg" alt=""> -->
+                          <img src="{{$post['picture']}}" alt="">
                         </div>
                         @endif
                         <div class="social-icon">
@@ -32,7 +31,7 @@
                           <p class="card-text">{{$post['message']}}</p>
                           <hr>
                           <p>
-                            <b>{{$post['belongs_to']}}</b>
+                            <small>{{$post['belongs_to']}}</small>
                             <br>
                             <span class="date">{{date('d. F Y H:i', $post['created'])}}</span>
                           </p>
@@ -58,7 +57,7 @@
                         <p class="card-text">{!! html_entity_decode($post['message'], ENT_QUOTES, 'UTF-8') !!}</p>
                         <hr>
                         <p>
-                          <b>{{$post['belongs_to']}}</b>
+                          <small>{{$post['belongs_to']}}</small>
                           <br>
                           <span class="date">{{date('d. F Y H:i', $post['created'])}}</span>
                         </p>
@@ -112,4 +111,3 @@
 
   </div>
 </div>
-@endsection

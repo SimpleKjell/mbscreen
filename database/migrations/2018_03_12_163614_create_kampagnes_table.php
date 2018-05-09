@@ -34,6 +34,24 @@ class CreateKampagnesTable extends Migration
           $table->text('insta_kpi_kommentare')->nullable();
           $table->text('insta_kpi_teilungen')->nullable();
           $table->text('insta_kpi_vid_views')->nullable();
+
+          $table->text('image_content_1')->nullable();
+          $table->text('image_content_2')->nullable();
+          $table->text('image_content_3')->nullable();
+          $table->text('image_content_4')->nullable();
+
+          $table->text('image_kanal_1')->nullable();
+          $table->text('image_kanal_2')->nullable();
+          $table->text('image_kanal_3')->nullable();
+          $table->text('image_kanal_4')->nullable();
+
+          $table->text('video_art')->nullable();
+          $table->text('video_url')->nullable();
+          $table->text('video_duration')->nullable();
+
+
+
+
           $table->text('category')->nullable();
           $table->text('art')->nullable();
           $table->timestamps();

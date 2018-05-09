@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Kunde;
+use MediaUploader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KundenController extends Controller
 {
@@ -45,6 +47,17 @@ class KundenController extends Controller
       $kunde->title = $request->input('title');
 
       $kunde->save();
+
+      // Media
+      if(!is_null($request['kunden_logo'])) {
+
+          $media = MediaUploader::fromSource($request->file('kunden_logo'))
+          ->toDirectory('/uploads')
+          ->upload();
+
+          $kunde->attachMedia($media, ['kunden_logo']);
+      }
+
 
       return redirect('/admin/kunden')->with('success', 'Kunde erstellt.');
     }
@@ -88,9 +101,18 @@ class KundenController extends Controller
       // Create Kamapgne
       $kunde = Kunde::find($id);
       $kunde->title = $request->input('title');
-      
+
 
       $kunde->save();
+
+      if(!is_null($request['kunden_logo'])) {
+
+          $media = MediaUploader::fromSource($request->file('kunden_logo'))
+          ->toDirectory('/uploads')
+          ->upload();
+
+          $kunde->syncMedia($media, ['kunden_logo']);
+      }
 
       return redirect('/admin/kunden')->with('success', 'Kunde erfolgreich bearbeitet.');
     }

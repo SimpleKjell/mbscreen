@@ -16,8 +16,10 @@ use Trello;
 class FrontendController extends Controller
 {
 
-    public function showSocialStream()
+    public function showSocialStream(Request $request)
     {
+
+
 
       $posts = [];
 
@@ -194,9 +196,13 @@ class FrontendController extends Controller
         return $item2['created'] <=> $item1['created'];
       });
 
+      $ajax = $request->ajax();
       $data = [
-        'posts' => $posts
+        'posts' => $posts,
+        'ajax' => $ajax
       ];
+
+
 
       return view('frontend.mediabrothers')->with($data);
 
@@ -251,11 +257,13 @@ class FrontendController extends Controller
 
     }
 
-    public function showKampagnen()
+    public function showKampagnen(Request $request)
     {
       $kampagnen = Kampagne::all();
 
-      return view('frontend.kampagnen')->with('kampagnen', $kampagnen);
+      $ajax = $request->ajax();
+
+      return view('frontend.kampagnen')->with(['kampagnen' => $kampagnen, 'ajax' => $ajax] );
     }
 
     public function showLive()

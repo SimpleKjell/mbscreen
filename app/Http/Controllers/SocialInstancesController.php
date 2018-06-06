@@ -37,7 +37,7 @@ class SocialInstancesController extends Controller
 
       $facebookL = '';
       $social = Social::find($id);
-
+      $accesToken = '';
       $pages = [];
       if($social) {
 
@@ -49,7 +49,7 @@ class SocialInstancesController extends Controller
           $fb = app(\SammyK\LaravelFacebookSdk\LaravelFacebookSdk::class);
 
           $accesToken = session('fb_user_access_token');
-          var_dump($accesToken);
+
           if(!empty($accesToken)) {
 
             try {
@@ -118,6 +118,7 @@ class SocialInstancesController extends Controller
         'social' => $social,
         'kunden' => $kundenSelect,
         'facebook_l' => $facebookL,
+        'token' => $accesToken,
       ];
 
       return view('socials.instances.create')->with($data);
@@ -138,6 +139,8 @@ class SocialInstancesController extends Controller
       // Social der Instance
       $social = Social::find($id);
 
+      $accessToken = $request->input('token');
+
       $pageId = 0;
       // Facebook API Call
       if($social->social == 'Facebook') {
@@ -153,7 +156,7 @@ class SocialInstancesController extends Controller
 
         // FB Call
         try {
-            $res = $fb->get('/' . $pageId . '?fields=id,name,picture,about,attire,bio,location,parking,hours,emails,website', $social->key);
+            $res = $fb->get('/' . $pageId . '?fields=id,name,picture,about,attire,bio,location,parking,hours,emails,website', $accessToken);
         } catch (Facebook\Exceptions\FacebookSDKException $e) {
             dd($e->getMessage());
         }

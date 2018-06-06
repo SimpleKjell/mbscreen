@@ -27,6 +27,7 @@
 
         {{Form::hidden('social_id', $social->id)}}
         {{Form::hidden('anz_posts', '10')}}
+        {{Form::hidden('token', $token)}}
 
 
         {{Form::submit('Hinzufügen', ['class' => 'btn btn-info btn-block'])}}
@@ -39,7 +40,7 @@
       @if($facebook_l)
         <p>
           Es wird eine App-Authorisierung benötigt, um die Pages auslesen zu können.
-          <br>          
+          <br>
           Sollte ein weiterer Administrator hinzugefügt werden ( bisher: Kevin Mayr ), muss dieser ebenfalls in der FB- App hinterlegt werden.
         </p>
         <br><br>

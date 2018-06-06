@@ -31,14 +31,15 @@
     $art = $kampagne->art;
     $artArr = json_decode($art);
 
+
     ?>
     {{Form::label('art', 'Art / Geräte')}}
     <br>
-    {{Form::checkbox('is_mobile', 'is_mobile', $artArr->mobile, ['id' => 'is_mobile'])}} {{Form::label('is_mobile', 'Mobil')}}
+    {{Form::checkbox('is_mobile', 'is_mobile', ($artArr) ? $artArr->mobile : '', ['id' => 'is_mobile'])}} {{Form::label('is_mobile', 'Mobil')}}
     <br>
-    {{Form::checkbox('is_desktop', 'is_desktop', $artArr->desktop, ['id' => 'is_desktop'])}} {{Form::label('is_desktop', 'Desktop')}}
+    {{Form::checkbox('is_desktop', 'is_desktop', ($artArr) ? $artArr->desktop : '', ['id' => 'is_desktop'])}} {{Form::label('is_desktop', 'Desktop')}}
     <br>
-    {{Form::checkbox('is_social', 'is_social', $artArr->social, ['id' => 'is_social'])}} {{Form::label('is_social', 'Social Media')}}
+    {{Form::checkbox('is_social', 'is_social', ($artArr) ? $artArr->social : '', ['id' => 'is_social'])}} {{Form::label('is_social', 'Social Media')}}
     <br>
   </div>
 

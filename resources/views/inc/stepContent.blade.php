@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
   <div class="row">
     <!--  Projektinformation -->
@@ -394,16 +395,31 @@
             $i = 0;
             foreach ($slides as $slide) {
               ?>
+
               <div class="<?php echo ($i == 0) ? '' : '';?>">
                 <img class="d-block w-100" src="<?php echo $slide['url']; ?>" alt="">
                 <div class="bg-white p-3">
                   <?php
                   if($slide['video']) {
-                    ?>
-                    <div data-duration="<?php echo $slide['duration']?>" class="videoWrapper">
-                      <iframe width="960" height="315" src="<?php echo $slide['url'] . '?rel=0&amp;controls=0&amp;showinfo=0'; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    <?php
+
+                    $videoart = ($slide['logo'] == '1') ? 'youtube' : 'vimeo';
+                    switch ($videoart) {
+                      case 'youtube':
+                        ?>
+                        <div data-ele-id="<?php echo $videoCount;?>" data-duration="<?php echo $slide['duration']?>" class="videoWrapper" data-videoid="<?php echo $slide['url']; ?>" data-videoart="<?php echo $videoart; ?>">
+                          <div id="player-<?php echo $videoCount;?>"></div>
+                        </div>
+                        <?php
+                        break;
+
+                      default:
+                        ?>
+                        <div data-ele-id="<?php echo $videoCount;?>" data-duration="<?php echo $slide['duration']?>" class="videoWrapper" data-videoid="<?php echo $slide['url']; ?>" data-videoart="<?php echo $videoart; ?>">
+                          <div id="player-<?php echo $videoCount;?>"></div>
+                        </div>
+                        <?php
+                        break;
+                    }
                   } else {
                     ?>
                     <span class="kanal-logo mr-3 text-center">

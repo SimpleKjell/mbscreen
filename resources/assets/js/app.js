@@ -26,6 +26,105 @@ timeout = '';
 
 jQuery(document).ready(function($) {
 
+  var them = this;
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
+  var player = [];
+  function onYouTubeIframeAPIReady() {
+    // console.log('reaaady');
+  }
+
+
+  $('[data-videoart="youtube"]').each(function ( index ) {
+
+    var eleId = $(this).attr('data-ele-id');
+
+    var videoId = $(this).attr('data-videoid');
+
+    ytplayer = new YT.Player('player-'+eleId , {
+      height: '360',
+      width: '640',
+      videoId: videoId,
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+    $(this).attr('data-player-arr', eleId);
+
+    player.push(ytplayer);
+
+  })
+
+  $('[data-videoart="vimeo"]').each(function ( index ) {
+
+    var eleId = $(this).attr('data-ele-id');
+
+    var videoId = $(this).attr('data-videoid');
+    // console.log(eleId);
+
+    var options = {
+        id: videoId,
+        width: 640,
+        loop: false
+    };
+
+    var vimeoplayer = new Vimeo.Player('player-'+eleId , options);
+
+    vimeoplayer.setVolume(0);
+
+    vimeoplayer.on('play', function() {
+        console.log('played the video!');
+    });
+
+    $(this).attr('data-player-arr', eleId);
+
+    player.push(vimeoplayer);
+
+
+  })
+
+
+  $('#kampagnenSlider').on('slid.bs.carousel', function () {
+
+    player.forEach(function ( i, index ) {
+      var ele = $('[data-player-arr='+index+']')
+      var art = ele.attr('data-videoart')
+      if(art == 'youtube') {
+        i.stopVideo();
+      } else {
+        i.unload();
+      }
+
+    })
+  })
+
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    // console.log(event.target);
+    // event.target.playVideo();
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  function onPlayerStateChange(event) {
+    // if (event.data == YT.PlayerState.PLAYING && !done) {
+    //   setTimeout(stopVideo, 6000);
+    //   done = true;
+    // }
+  }
+  function stopVideo() {
+    player.stopVideo();
+  }
+  function playVideo() {
+    console.log('play it!!');
+    player.playVideo();
+  }
+
+
   var autoplayTimeout = 6000;
   $('.owl-carousel').each(function (index) {
     $('.owl-carousel-'+index).owlCarousel({
@@ -65,7 +164,18 @@ jQuery(document).ready(function($) {
       if(current.find('.videoWrapper').length > 0) {
 
 
-        $(".owl-item.active iframe")[0].src += "&autoplay=1";
+        var wrap = current.find('.videoWrapper');
+
+        var art = wrap.attr('data-videoart');
+
+        if(art == 'youtube') {
+          var playerArr = wrap.attr('data-player-arr');
+          player[playerArr].playVideo();
+        } else {
+          var playerArr = wrap.attr('data-player-arr');
+          player[playerArr].play();
+        }
+        // $(".owl-item.active iframe")[0].src += "&autoplay=1";
 
 
         var duration = parseInt(current.find('.videoWrapper').attr('data-duration'));
@@ -82,8 +192,6 @@ jQuery(document).ready(function($) {
   })
 
   $('.owl-carousel').on('change.owl.carousel', function(e) {
-
-
 
 
   if (e.namespace && e.property.name === 'position' && e.relatedTarget.relative(e.property.value) === e.relatedTarget.items().length - 1) {

@@ -2,15 +2,22 @@
 
 @section('content')
 
-  <h1>{{$socialInstance->title}}</h1>
+  <h1>
+    <?php
+    $title = json_decode($socialInstance->title);
+    echo (is_null($title)) ? $socialInstance->title : $title->name;
+    ?>
+  </h1>
 
   {!! Form::open(['action' => ['SocialInstancesController@update', $sId, $socialInstance->id], 'method' => 'POST'] ) !!}
 
 
     <div class="form-group">
       {{Form::label('title', 'Accountname')}}
-      {{Form::text('title', $socialInstance->title, ['class' => 'form-control', 'placeholder' => 'Name des Accounts, z.B. mediabrothers'])}}
+      {{Form::text('title', (is_null($title)) ? $socialInstance->title : $title->name, ['class' => 'form-control', 'placeholder' => 'Name des Accounts, z.B. mediabrothers'])}}
     </div>
+
+    {{Form::hidden('token', (is_null($title)) ? '' : $title->token)}}
 
     @if($kunden)
       <div class="form-group marginTopMedium">

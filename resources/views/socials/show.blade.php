@@ -39,7 +39,12 @@
         <tr>
           <th scope="row">{{$instance->id}}</th>
           <th scope="row">{{$instance->page_id}}</th>
-          <td>{{$instance->title}}</td>
+          <td>
+            <?php
+            $title = json_decode($instance->title);            
+            echo (is_null($title)) ? $instance->title : $title->name;
+            ?>
+          </td>
           <td>{{$instance->anz_posts}}</td>
           <td>{{($kunde) ? $kunde->title : ''}}</td>
           <td>{{($instance->use_wall == "val") ? 'Ja' : 'Nein'}}</td>

@@ -43,9 +43,10 @@ class FrontendController extends Controller
 
           $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
+          $toks = json_decode($facebookPage->title);
 
           try {
-              $res = $fb->get('/' . $facebookPage->page_id . '/posts?limit='.$facebookPage->anz_posts.'&fields=message,id,picture,full_picture,created_time', $facebookConfig->key);
+              $res = $fb->get('/' . $facebookPage->page_id . '/posts?limit='.$facebookPage->anz_posts.'&fields=message,id,picture,full_picture,created_time', $toks->token);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
               dd($e->getMessage());
           }

@@ -168,7 +168,12 @@ class SocialInstancesController extends Controller
         $socialInstance->picture = $node->getPicture();
 
         // Name der Instance
-        $name = $node->getName();
+        // Zum Namen wird jetzt auch der AccessToken gespeichert:
+        $arr = [
+          'name' => $node->getName(),
+          'token' => $accessToken
+        ];
+        $name = json_encode($arr);
 
       } else if($social->social == 'Twitter') {
 
@@ -178,11 +183,23 @@ class SocialInstancesController extends Controller
         ]);
 
         // Name der Instance
-        $name = $request->input('title');
+        // Zum Namen wird jetzt auch der AccessToken gespeichert:
+        $arr = [
+          'name' => $request->input('title'),
+          'token' => $accessToken
+        ];
+        $name = json_encode($arr);
 
       } else {
         $pageId = $request->input('page_id');
-        $name = $request->input('title');
+
+        // Name der Instance
+        // Zum Namen wird jetzt auch der AccessToken gespeichert:
+        $arr = [
+          'name' => $request->input('title'),
+          'token' => $accessToken
+        ];
+        $name = json_encode($arr);
 
       }
 
@@ -259,7 +276,15 @@ class SocialInstancesController extends Controller
       } else {
         $socialInstance->use_wall = '';
       }
-      $socialInstance->title = $request->input('title');
+
+      $arr = [
+        'name' => $request->input('title'),
+        'token' => $request->input('token')
+      ];
+
+      $socialInstance->title = json_encode($arr);
+
+
       $socialInstance->kunden_id = $request->input('kunden_id');
       $socialInstance->save();
 

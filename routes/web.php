@@ -103,6 +103,12 @@ Route::get('/admin/facebook/callback', function(SammyK\LaravelFacebookSdk\Larave
     // Save for later
     Session::put('fb_user_access_token', (string) $token);
 
+    // return redirect()->action('SocialController@create');
+
+    $id = session('redirect_social_instance_id');
+        
+    return redirect()->action('SocialInstancesController@create', ['id' => $id]);
+
     // Get basic info on the user from Facebook.
     // try {
     //     $response = $fb->get('/me/accounts?fields=data');

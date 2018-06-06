@@ -17,7 +17,7 @@
             <img class="rounded-circle" src="<?php echo $url;?>" alt="">
           </div>
         </div>
-        <div class="col-md-8 pr-0 justify-content-center align-self-center">
+        <div class="col-md-7 pr-0 justify-content-center align-self-center">
           <div class="bg-white pt-2 pb-2 pl-3">
             <?php echo $kampagne->title; ?>
           </div>
@@ -25,38 +25,39 @@
             <?php echo $kampagne->kunde->title; ?>
           </div>
         </div>
-        <div class="col-md-2 pr-0 justify-content-center align-self-center">
-          <div class="bg-white p-3 h-100 text-center">
-            <?php
-            switch ($kampagne->category) {
-              case '0':
-                echo 'Kampagne';
-                break;
-              case '1':
-                echo 'Website';
-                break;
-              case '2':
-                echo 'Gamification';
-                break;
-              case '3':
-                echo 'Social Media Kampagne';
-                break;
-            }
+        <div class="col-md-3 pr-0 justify-content-center align-self-center">
+          <div class="bg-white p-3 h-100">
+            <ul class="ml-0 pl-4 mb-0">
+              <?php
+              switch ($kampagne->category) {
+                case '0':
+                  echo '<li>Kampagne</li>';
+                  break;
+                case '1':
+                  echo '<li>Website</li>';
+                  break;
+                case '2':
+                  echo '<li>Gamification</li>';
+                  break;
+                case '3':
+                  echo '<li>Social Media Kampagne</li>';
+                  break;
+              }
 
-            $art = $kampagne->art;
-            if($art) {
-              $artArr = json_decode($art);
-              if(!is_null($artArr->mobile))
-                echo '<div>Mobile</div>';
-              if(!is_null($artArr->desktop))
-                echo '<div>Desktop</div>';
-              if(!is_null($artArr->desktop))
-                echo '<div>Social Media</div>';
-            }
+              $art = $kampagne->art;
+              if($art) {
+                $artArr = json_decode($art);
+                if(!is_null($artArr->mobile))
+                  echo '<li>Mobile</li>';
+                if(!is_null($artArr->desktop))
+                  echo '<li>Desktop</li>';
+                if(!is_null($artArr->desktop))
+                  echo '<li>Social Media</li>';
+              }
 
 
-            ?>
-
+              ?>
+            </ul>
           </div>
         </div>
       </div>

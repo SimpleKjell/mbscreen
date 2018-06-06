@@ -129,12 +129,12 @@
             {{Form::select('video_art', ['Vimeo', 'YouTube'], '' , ['class' =>  'form-control'])}}
           </div>
           <div class="col-md-8">
-            {{Form::label('video_url', 'Videourl')}}
-            {{Form::text('video_url', '', ['class' => 'form-control', 'placeholder' => 'Videourl'])}}
+            {{Form::label('video_url', 'Video ID')}}
+            {{Form::text('video_url', '', ['class' => 'form-control', 'placeholder' => 'Video ID'])}}
           </div>
           <div class="col-md-2">
             {{Form::label('video_duration', 'Videolänge')}}
-            {{Form::text('video_duration', '', ['class' => 'form-control', 'placeholder' => 'Videourl'])}}
+            {{Form::text('video_duration', '', ['class' => 'form-control', 'placeholder' => 'in Sekunden, z.B. 120'])}}
           </div>
         </div>
 

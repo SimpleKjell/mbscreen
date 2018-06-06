@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\SocialInstance;
 use Vinkla\Instagram\Instagram;
 use Illuminate\Support\Facades\Input;
+use Session;
+
 
 class SocialInstancesController extends Controller
 {
@@ -32,37 +34,63 @@ class SocialInstancesController extends Controller
     public function create($id)
     {
 
-      $social = Social::find($id);
 
+      $facebookL = '';
+      $social = Social::find($id);
 
       $pages = [];
       if($social) {
 
         if($social->social == 'Facebook') {
 
-          $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-          try {
-              $response = $fb->get('/me/accounts?fields=data', $social->key);
-          } catch (Facebook\Exceptions\FacebookSDKException $e) {
-              dd($e->getMessage());
-          }
 
-          $pageIds = $response->getDecodedBody();
-          // var_dump($social->key);
 
-          foreach ($pageIds['data'] as $key => $pageId) {
-            $pageId = $pageId['id'];
+          // $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+          $fb = app(\SammyK\LaravelFacebookSdk\LaravelFacebookSdk::class);
+
+          $accesToken = session('fb_user_access_token');
+          var_dump($accesToken);
+          if(!empty($accesToken)) {
 
             try {
-                $res = $fb->get('/' . $pageId, $social->key);
+                $response = $fb->get('/me/accounts?fields=data', $accesToken);
             } catch (Facebook\Exceptions\FacebookSDKException $e) {
                 dd($e->getMessage());
             }
 
-            $node = $res->getGraphPage();
+            $pageIds = $response->getDecodedBody();
+            // var_dump($pageIds);
+            // die();
+            // exit();
+            // var_dump($social->key);
 
-            $pages[$node->getId()] = $node->getName();
+            foreach ($pageIds['data'] as $key => $pageId) {
+              $pageId = $pageId['id'];
+
+              try {
+                  $res = $fb->get('/' . $pageId, $accesToken);
+              } catch (Facebook\Exceptions\FacebookSDKException $e) {
+                  dd($e->getMessage());
+              }
+
+              $node = $res->getGraphPage();
+
+              $pages[$node->getId()] = $node->getName();
+            }
+
+            Session::forget('redirect_social_instance_id');
+            Session::forget('fb_user_access_token');
+          } else {
+
+            $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "/";
+            $facebookL = $fb->getLoginUrl(['manage_pages']);
+            Session::put('redirect_social_instance_id', $id);
           }
+
+          // $key = 'EAAdYqD61P9EBAEXhFp2VJ9imfyxIdc8cwz0W5ZAOL9bgughMkmfZCTpsEVNHFOiTZCRsfKSdo9oeVLmMs1XHfC7NBd7C2JAmeDfIT3jPB1sZCWm9fKNHUAl7ZARo4BPjEsP0rRzfe3L7lRZAsONH2Ut3qtDMIpLs0MZBWysZCdhKyQZDZD';
+          // $token_key = 'EAAdYqD61P9EBADdsd5E8TSQJGW0s4XOZBdzOOhd0Wb5ZBgvjR9Rf5ZBAsXgaSheHzS6CmuTuYjghW8bXD32p0oa2hKCZBtDh8Bb3Mde9O8l4wAjD64SDsivDjhi68nemZCFZAXLiODIxzOUS6Y41VXwMIknStiFPif1PwnHsZA3TAZDZD';
+
+
 
         } else if($social->social == 'Twitter') {
 
@@ -88,7 +116,8 @@ class SocialInstancesController extends Controller
       $data = [
         'pages' => $pages,
         'social' => $social,
-        'kunden' => $kundenSelect
+        'kunden' => $kundenSelect,
+        'facebook_l' => $facebookL,
       ];
 
       return view('socials.instances.create')->with($data);

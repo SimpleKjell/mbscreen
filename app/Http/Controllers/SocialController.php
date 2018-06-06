@@ -31,6 +31,7 @@ class SocialController extends Controller
     {
 
       $facebookL = '';
+      
       $accesToken = session('fb_user_access_token');
 
 
